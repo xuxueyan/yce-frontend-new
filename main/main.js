@@ -6,7 +6,9 @@ requirejs.config({
         angularAnimate: '../lib/angular-animate.min',
         ngNotify: '../lib/angular-atomic-notify',
         api: '../js/common/api',
-        utils: '../js/common/utils'
+        utils: '../js/common/utils',
+        repeatFinished: '../js/directives/repeatFinished',
+        echarts: '../lib/echarts'
     },
     shim: {
         'angular': {
@@ -27,6 +29,9 @@ requirejs.config({
             deps: ['angular']
         },
         utils: {
+            deps: ['angular']
+        },
+        repeatFinished: {
             deps: ['angular']
         }
     }

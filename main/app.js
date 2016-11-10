@@ -1,7 +1,6 @@
+define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils', 'repeatFinished'], function(angular){
 
-define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'], function(angular){
-
-    var yceMain = angular.module('yceMain',['ngRoute', 'atomic-notify', 'ngAnimate']);
+    var yceMain = angular.module('yceMain',['ngRoute', 'atomic-notify', 'ngAnimate', 'repeatFinished']);
 
     yceMain.controller('mainController',function($scope, $http){
 
@@ -35,6 +34,11 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
         $scope.getNavList();
 
 
+        $scope.subUser = function(id, name){
+            $scope.showSubUser = id + name;
+        };
+
+
     });
 
     yceMain.config(['$routeProvider', '$controllerProvider', function ($routeProvider, $controllerProvider){
@@ -55,7 +59,11 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
 
         $routeProvider
             .when('/dashBoard', {
-                templateUrl: 'views/dashBoard.html'
+                templateUrl: 'views/dashBoard.html',
+                controller: 'dashBoardCtrl',
+                resolve: {
+                    delay: ctrlRegister('dashBoardCtrl',['controllers/dashBoard.js'])
+                }
 
             })
 
@@ -67,9 +75,6 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                 }
             })
     }]);
-
-
-
 
     return yceMain;
 

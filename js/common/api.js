@@ -44,7 +44,6 @@
             headers['Pragma'] = 'no-cache';
         }
         return http(
-
             {
                 url:url,
                 method:method,
@@ -94,6 +93,28 @@
 
     yce.api.user.navList = function (http, data){
         return createRequest(http, '/api/v1/organizations/'+ data.orgId +'/users/'+ data.userId+'/navList');
+    };
+
+
+
+    /**
+     *
+     * dashBoard接口
+     *
+     * */
+
+    yce.api.dashBoard = {};
+
+    yce.api.dashBoard.resourceList = function (http, data){
+        return createRequest(http, '/api/v1/organizations/'+ data.orgId +'/resourcestat');
+    };
+
+    yce.api.dashBoard.applymentList = function (http, data){
+        return createRequest(http, '/api/v1/organizations/'+ data.orgId +'/deploymentstat');
+    };
+
+    yce.api.dashBoard.handleList = function(http, data){
+        return createRequest(http, '/api/v1/organizations/'+ data.orgId +'/operationstat');
     };
 
 

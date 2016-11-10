@@ -5,12 +5,13 @@
 }
 
 .nav-list {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 60px;
     width: 260px;
     box-shadow: 0 0 10px 0 rgba(33,33,33,.2);
     height: 100%;
+    background-color: #fff;
 }
 .nav-list-user-info {
     margin: 20px 0;
@@ -63,10 +64,16 @@
 }
 .view-content {
     margin-left: 260px;
-    height: 100%;
     transition: .5s all ease;
+    padding: 30px;
 }
 
 .view-content.ng-leave-active{
     animation-name: fadeOutRight;
+}
+
+.view-title {
+    color: #767676;
+    font-size: 25px;
+    margin-bottom: 20px;
 }

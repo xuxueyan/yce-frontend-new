@@ -1,11 +1,7 @@
-/**
- * @desc:
- * @author: Mark
- */
+define(function (){
 
-define(['app'], function (yceMain){
+    return function appManageCtrl($scope, $http){
 
-    return function appManageCtrl($scope){
 
     }
 });

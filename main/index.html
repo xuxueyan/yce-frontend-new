@@ -36,12 +36,12 @@
             </div>
             <ul class="user-list">
                 <li ng-repeat="item in ::navList">
-                    <a ng-click="show = !show" ng-href="#/{{item.href}}">
+                    <a ng-href="#/{{item.href}}" ng-click="subUser(item.id, item.name)">
                         <i class="fa {{item.className}}"></i>
                         {{item.name}}
                     </a>
 
-                    <ul class="sub-user-list animated" ng-show="show">
+                    <ul class="sub-user-list animated" ng-show="item.id + item.name == showSubUser">
                         <li ng-repeat="item in ::item.item">
                             <a ng-href="#/{{item.href}}">{{item.name}}</a>
                         </li>

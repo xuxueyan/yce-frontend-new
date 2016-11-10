@@ -5,3 +5,5 @@
 
 @import "layouts/header.css";
 @import "layouts/content.css";
+
+@import "page/dashBoard.css";

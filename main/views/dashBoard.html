@@ -1,0 +1,22 @@
+<div>
+    <h1 class="view-title">
+        DashBoard
+    </h1>
+
+    <h2 class="dashboard-item-title view-title">资源情况(显示总览以及各数据中心资源)</h2>
+
+    <div class="clearfix">
+
+        <div class="echart-box fl" ng-repeat="item in resourceDom" repeat-finished="resourceFinished" id="resourceDom{{item.dcId}}"></div>
+    </div>
+
+    <h2 class="dashboard-item-title view-title">应用情况(显示应用拓扑关系)</h2>
+    <div class="clearfix">
+        <div class="echart-box fl" ng-repeat="item in applyDom" repeat-finished="applyFinished" id="applyDom{{$index}}"></div>
+    </div>
+
+    <h2 class="dashboard-item-title view-title">操作情况(显示近一周内相关操作)</h2>
+
+    <div class="echart-box handle-box" id="handleDom"></div>
+
+</div>
