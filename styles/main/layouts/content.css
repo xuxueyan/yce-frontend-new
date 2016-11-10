@@ -1,0 +1,72 @@
+.content {
+    height: 100%;
+    width: 100%;
+    padding-top: 60px;
+}
+
+.nav-list {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    width: 260px;
+    box-shadow: 0 0 10px 0 rgba(33,33,33,.2);
+    height: 100%;
+}
+.nav-list-user-info {
+    margin: 20px 0;
+}
+.nav-list-user-info img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    margin: 0 25px;
+}
+.user-message p {
+    line-height: 34px;
+}
+.user-message .name {
+    font-size: 20px;
+    color: #505458;
+}
+.user-message .job {
+    color: #ccc;
+}
+.user-list a {
+    border-left: 4px solid transparent;
+    line-height: 42px;
+    height: 42px;
+    display: block;
+    transition: 500ms all ease;
+    padding-left: 5px;
+    color: #000;
+}
+
+.user-list a:hover {
+    border-left: 4px solid #3F51B5;
+}
+
+.user-list li a i{
+    width: 45px;
+    text-align: center;
+}
+.sub-user-list a {
+    padding-left: 53px;
+}
+.sub-user-list {
+    transition: .5s all linear;
+}
+.sub-user-list.ng-hide-remove-active {
+    animation-name: fadeInLeft;
+}
+.sub-user-list.ng-hide-add-active{
+    animation-name: fadeOutLeft;
+}
+.view-content {
+    margin-left: 260px;
+    height: 100%;
+    transition: .5s all ease;
+}
+
+.view-content.ng-leave-active{
+    animation-name: fadeOutRight;
+}

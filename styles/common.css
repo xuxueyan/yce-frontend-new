@@ -1,0 +1,9 @@
+/**
+ *  @desc: 项目公用CSS文件
+ *  @author: Mark
+ */
+
+@import "common/base.css";
+@import "lib/animate.css";
+@import "lib/angular-atomic-notify.css";
+@import "lib/font-awesome/css/font-awesome.min.css";

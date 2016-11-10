@@ -1,0 +1,36 @@
+header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 60px;
+    background: #3F51B5;
+    line-height: 60px;
+    color: #fff;
+    width: 100%;
+}
+.logo {
+    width: 260px;
+    height: 60px;
+    background: url("../../../images/logo.png");
+}
+
+.nav-slide {
+    margin-left: 20px;
+    line-height: 60px;
+
+}
+
+.user-info img{
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.quit {
+    margin: 0 40px;
+}
+.quit a:hover {
+    text-decoration: underline;
+}
+

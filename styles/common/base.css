@@ -1,0 +1,68 @@
+/**
+ * @desc: 基本样式库
+ * @author: Mark
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+}
+html,body {
+    width: 100%;
+    height: 100%;
+}
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+
+}
+
+
+li {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6, b, strong {
+    font-weight: normal;
+}
+
+i, em {
+    font-style: normal;
+}
+
+img {
+    vertical-align: top;
+}
+
+a img {
+    border: 0;
+}
+
+.clearfix:after {
+    display: block;
+    clear: both;
+    content: '';
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #000;
+    padding: 0;
+}
