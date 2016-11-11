@@ -8,7 +8,8 @@ requirejs.config({
         api: '../js/common/api',
         utils: '../js/common/utils',
         repeatFinished: '../js/directives/repeatFinished',
-        echarts: '../lib/echarts'
+        echarts: '../lib/echarts',
+        ngLoading: '../js/directives/ngLoading'
     },
     shim: {
         'angular': {
@@ -32,6 +33,9 @@ requirejs.config({
             deps: ['angular']
         },
         repeatFinished: {
+            deps: ['angular']
+        },
+        ngLoading: {
             deps: ['angular']
         }
     }

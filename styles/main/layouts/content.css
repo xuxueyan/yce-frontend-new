@@ -64,13 +64,10 @@
 }
 .view-content {
     margin-left: 260px;
-    transition: .5s all ease;
     padding: 30px;
+    position: relative;
 }
 
-.view-content.ng-leave-active{
-    animation-name: fadeOutRight;
-}
 
 .view-title {
     color: #767676;

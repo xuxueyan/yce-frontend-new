@@ -8,9 +8,12 @@ define(['echarts'], function (echarts){
         //resource ajax
         var resourceToken = yce.api.dashBoard.resourceList($http, data);
 
+        $scope.complete = 0;
+
         utils.responseHandler(resourceToken, function (data){
             if(data.code == 0){
                 $scope.resourceDom = JSON.parse(data.data);
+                $scope.complete++;
             }
             // resource Dom element repeat Completed
             $scope.$on('resourceFinished', function (){
@@ -73,6 +76,8 @@ define(['echarts'], function (echarts){
         utils.responseHandler(applyToken, function (data){
             if(data.code == 0){
                 $scope.applyDom = JSON.parse(data.data);
+                $scope.complete++;
+
             }
             $scope.$on('applyFinished', function (){
                 angular.forEach($scope.applyDom, function(data, index) {
@@ -157,6 +162,8 @@ define(['echarts'], function (echarts){
         utils.responseHandler(handleToken, function (data){
             if(data.code == 0){
                 var handleData = JSON.parse(data.data);
+                $scope.complete++;
+
 
                 echarts.init(document.getElementById('handleDom')).setOption({
                     backgroundColor: '#fff',

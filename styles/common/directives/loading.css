@@ -1,0 +1,16 @@
+.loading {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #fff;
+
+}
+.loading-progress {
+    background-color: #FF1493;
+    height: 4px;
+    width: 90%;
+    transition: .5s all linear;
+}

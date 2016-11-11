@@ -1,6 +1,6 @@
-define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils', 'repeatFinished'], function(angular){
+define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils', 'repeatFinished', 'ngLoading'], function(angular){
 
-    var yceMain = angular.module('yceMain',['ngRoute', 'atomic-notify', 'ngAnimate', 'repeatFinished']);
+    var yceMain = angular.module('yceMain',['ngRoute', 'atomic-notify', 'ngAnimate', 'repeatFinished', 'ngLoading']);
 
     yceMain.controller('mainController',function($scope, $http){
 
@@ -16,6 +16,8 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
             });
         };
 
+        $scope.complete = 0;
+
         $scope.getNavList = function(){
             var data = {
                 orgId: localStorage.orgId,
@@ -27,6 +29,9 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                 if(data.code == 0){
                     var data = JSON.parse(data.data);
                     $scope.navList = data.list;
+
+                    $scope.complete++;
+
                 }
             });
 
@@ -74,6 +79,8 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                     delay: ctrlRegister('appManageCtrl',['controllers/appManage.js'])
                 }
             })
+
+            .otherwise({redirectTo: '/dashBoard'});
     }]);
 
     return yceMain;
