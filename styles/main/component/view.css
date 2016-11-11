@@ -1,0 +1,12 @@
+.view {
+    margin-left: 260px;
+    padding: 30px;
+    position: relative;
+}
+
+
+.view-title {
+    color: #767676;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
