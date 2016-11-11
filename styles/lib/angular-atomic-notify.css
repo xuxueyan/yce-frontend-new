@@ -1,14 +1,11 @@
-ng-atomic-notify {
-    position: fixed;
-    right: 0;
-    top: 0;
-}
 
 .atomic-notify {
     z-index: 100000;
     right: 0;
     float: left;
     width: 500px;
+    position: fixed;
+    top: 30px;
 }
 
 .atomic-notify .atomic-notify-item {

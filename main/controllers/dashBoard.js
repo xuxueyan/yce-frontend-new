@@ -1,6 +1,9 @@
 define(['echarts'], function (echarts){
 
-    return function dashBoardCtrl($scope, $http){
+    return function dashBoardCtrl($scope, $http, atomicNotifyService) {
+
+
+        console.log(atomicNotifyService);
 
         var data = {
             orgId: localStorage.orgId
@@ -14,6 +17,8 @@ define(['echarts'], function (echarts){
             if(data.code == 0){
                 $scope.resourceDom = JSON.parse(data.data);
                 $scope.complete++;
+            }else {
+                atomicNotifyService.error('获取资源失败!', 2000);
             }
             // resource Dom element repeat Completed
             $scope.$on('resourceFinished', function (){
@@ -29,14 +34,14 @@ define(['echarts'], function (echarts){
                                 fontSize: 16
                             }
                         },
-                        color: ['#F5DEB3', '#B0E0E6', '#D2691E', '#6495ED'], //重写颜色
+                        color: ['#FFCC99', '#B0E0E6', '#D2691E', '#6495ED'], //重写颜色
                         tooltip: {
                             trigger: 'item',
                             formatter: "{a} <br/>{b}: {c} ({d}%)"
                         },
                         legend: {
                             orient: 'vertical',
-                            left: 10,
+                            left: 5,
                             top: 10,
                             data: ['CPU已用', 'CPU未用', '内存已用', '内存未用']
                         },
@@ -44,10 +49,11 @@ define(['echarts'], function (echarts){
                             name: '内存使用率',
                             type: 'pie',
                             selectedMode: 'single',
-                            radius: [0, '30%'],
-                            label: {
+                            radius: [0, '25%'],
+                            labelLine: {
                                 normal: {
-                                    position: 'inner'
+                                    length: 3,
+                                    length2: 3
                                 }
                             },
                             data: [
@@ -57,7 +63,7 @@ define(['echarts'], function (echarts){
                         }, {
                             name: 'CPU使用率',
                             type: 'pie',
-                            radius: ['40%', '55%'],
+                            radius: ['50%', '60%'],
                             data: [
                                 { value: data.cpu.used, name: 'CPU已用' },
                                 { value: data.cpu.total - data.cpu.used, name: 'CPU未用' }
@@ -77,8 +83,10 @@ define(['echarts'], function (echarts){
             if(data.code == 0){
                 $scope.applyDom = JSON.parse(data.data);
                 $scope.complete++;
-
+            }else {
+                atomicNotifyService.error('获取应用失败', 2000);
             }
+
             $scope.$on('applyFinished', function (){
                 angular.forEach($scope.applyDom, function(data, index) {
                     var sourceName = data.deploymentName;
@@ -163,8 +171,6 @@ define(['echarts'], function (echarts){
             if(data.code == 0){
                 var handleData = JSON.parse(data.data);
                 $scope.complete++;
-
-
                 echarts.init(document.getElementById('handleDom')).setOption({
                     backgroundColor: '#fff',
                     title: {
@@ -228,6 +234,8 @@ define(['echarts'], function (echarts){
                         data: handleData.statistics.delete
                     }]
                 })
+            }else {
+                atomicNotifyService.error('获取操作失败', 2000);
             }
 
         });

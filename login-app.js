@@ -27,7 +27,7 @@ define(['angular', 'ngNotify', 'api', 'utils', 'clearClass'],function(angular){
 				}else {
 					atomicNotifyService.error(data.message, 2000);
 				}
-			},function (data){
+			},function (){
 				atomicNotifyService.error('服务器异常', 2000);
 			});
 		};

@@ -9,8 +9,8 @@
 
 }
 .loading-progress {
-    background-color: #FF1493;
-    height: 4px;
+    background-color: #CC3333;
+    height: 3px;
     width: 90%;
     transition: .5s all linear;
 }
