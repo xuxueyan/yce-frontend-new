@@ -9,3 +9,9 @@
 @import "page/dashBoard.css";
 
 @import "component/view.css";
+
+@import "component/search.css";
+
+@import "page/appManage.css";
+
+@import "component/button.css";

@@ -10,3 +10,10 @@
     font-size: 25px;
     margin-bottom: 20px;
 }
+
+.view-content {
+	background: #fff;
+	box-shadow: 0 0 10px 0 rgba(33,33,33,.2);
+	margin-top: 30px;
+	padding: 30px;
+}
