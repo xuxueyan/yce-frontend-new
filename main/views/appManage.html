@@ -16,7 +16,7 @@
 	    	<table>
 		    	<thead>
 			    	<tr>
-			    		<th ng-click="but()">ID</th>
+			    		<th>ID</th>
 			    		<th>应用名称</th>
 			    		<th>应用实例</th>
 			    		<th>运行状态</th>
@@ -26,8 +26,8 @@
 			    		<th>操作</th>						
 			    	</tr>
 			    </thead>
-			    <tbody ng-repeat=" list in appManageList ">
-			    	<tr ng-repeat=" item in list.deployments ">
+			    <tbody ng-repeat="list in appManageList ">
+			    	<tr ng-repeat="item in list.deployments ">
 			    		<td> {{ $index+1 }}</td>
 			    		<td> {{ item.deploy.metadata.name }} </td>
 			    		<td>
