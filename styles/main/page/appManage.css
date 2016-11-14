@@ -31,6 +31,48 @@
 	color: #fff;
 }
 
+/*进度条样式*/
+
+.state-back {
+    padding: 0 45%;
+    border-radius: 15px;
+    position: relative;
+}
+
+.state-defult {
+    border-radius: 15px;
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    padding: 8px 0;
+    transition: .5s all linear;
+  
+}
+
+.state-running {
+    background-color: #4caf50;
+    padding: 8px 44%;
+}
+
+.state-pending {
+    background-color: #31708f;
+    padding: 8px 30%;
+}
+
+.state-failed {
+    background-color: #a94442;
+    padding: 8px 20%;
+}
+
+.state-unknown {
+    background-color: #fcf8e3;
+    padding: 8px 44%;
+}
+
+.state-succeeded {
+    background-color: #fff;
+    padding: 8px 44%;
+}
 
 
 

@@ -7,7 +7,7 @@
 
     	<div class="view-content-search clearfix">
 	    	<div class="fr">
-	    		<input type="text" class="search-text fl" placeholder="请输入应用名称..." />
+	    		<input type="text" class="search-text fl" placeholder="请输入应用名称..." ng-model="searchInput" />
 	    		<span class="fa fa-search search-button fl"></span>
 	    	</div>	
     	</div>
@@ -26,8 +26,8 @@
 			    		<th>操作</th>						
 			    	</tr>
 			    </thead>
-			    <tbody ng-repeat="list in appManageList ">
-			    	<tr ng-repeat="item in list.deployments ">
+			    <tbody ng-repeat=" list in ::appManageList | filter:searchInput ">
+			    	<tr ng-repeat=" item in ::list.deployments ">
 			    		<td> {{ $index+1 }}</td>
 			    		<td> {{ item.deploy.metadata.name }} </td>
 			    		<td>
@@ -36,7 +36,11 @@
 			    			</p>
 			    		</td>
 			    		<td ng-repeat="i in item.podList.items">
-			    			<p> {{ i.status.phase }}</p>
+			    			<p> 
+								<span class="state-back">
+									<a  class="state-defult" ng-class="{'state-running': i.status.phase == 'Running','state-pending': i.status.phase == 'Pending','state-failed': i.status.phase == 'Failed','state-succeeded': i.status.phase == 'Succeeded','state-unknown': i.status.phase == 'Unknown'}"></a>
+								</span>
+			    			</p>
 			    		</td>
 			    		<td>
 			    			<p ng-repeat="i in item.podList.items">

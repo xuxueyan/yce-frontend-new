@@ -15,7 +15,7 @@ define(function (){
     		utils.responseHandler(appManageListToken, function(data){
     			
     			if(data.code == 0){
-    				// console.log(angular.toJson(JSON.parse(data.data)));
+                    
     				$scope.appManageList = JSON.parse(data.data);
 
 
