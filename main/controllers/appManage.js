@@ -5,7 +5,7 @@ define(function (){
     	var data = {
     		orgId: localStorage.orgId,
     		userId: localStorage.userId
-    	}
+    	};
 
 
     	function appManageInitFn() {
