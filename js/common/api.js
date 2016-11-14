@@ -119,6 +119,20 @@
 
 
 
+    /**
+     *
+     * appManage 接口
+     * appManageList，发布应用等
+     * */
+
+     yce.api.appManage = {};
+
+     yce.api.appManage.getAppManageList = function (http, data){
+        return createRequest(http, '/api/v1/organizations/' + data.orgId + '/users/' + data.userId + '/deployments');
+     }
+
+
+
 
 
 })(angular);

@@ -1,3 +1,61 @@
 <div>
+	<h1 class="view-title">
+        应用管理
+    </h1>
 
+    <div class="view-content">
+
+    	<div class="view-content-search clearfix">
+	    	<div class="fr">
+	    		<input type="text" class="search-text fl" placeholder="请输入应用名称..." />
+	    		<span class="fa fa-search search-button fl"></span>
+	    	</div>	
+    	</div>
+
+    	<div class="appManage-table">
+	    	<table>
+		    	<thead>
+			    	<tr>
+			    		<th ng-click="but()">ID</th>
+			    		<th>应用名称</th>
+			    		<th>应用实例</th>
+			    		<th>运行状态</th>
+			    		<th>创建时间</th>
+			    		<th>数据中心</th>
+			    		<th>发布人员</th>
+			    		<th>操作</th>						
+			    	</tr>
+			    </thead>
+			    <tbody ng-repeat=" list in appManageList ">
+			    	<tr ng-repeat=" item in list.deployments ">
+			    		<td> {{ $index+1 }}</td>
+			    		<td> {{ item.deploy.metadata.name }} </td>
+			    		<td>
+			    			<p ng-repeat="i in item.podList.items">
+			    				{{ i.metadata.name }}
+			    			</p>
+			    		</td>
+			    		<td ng-repeat="i in item.podList.items">
+			    			<p> {{ i.status.phase }}</p>
+			    		</td>
+			    		<td>
+			    			<p ng-repeat="i in item.podList.items">
+			    				{{ i.metadata.creationTimestamp }}
+			    			</p>
+			    		</td>
+			    		<td> {{ list.dcName }} </td>
+			    		<td> {{ item.deploy.spec.selector.matchLabels.author }} </td>
+			    		<td>
+			    			<span>
+			    				<button class="button-upgrade">升级</button>
+			    				<button class="button-rollback">回滚</button>
+			    				<button class="button-capacity">扩容</button>
+			    				<button class="button-delete">删除</button>
+			    			</span>
+			    		</td>
+			    	</tr>
+			    </tbody>
+	    	</table>
+    	</div>
+    </div>
 </div>
