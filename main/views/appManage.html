@@ -35,8 +35,8 @@
 			    				{{ i.metadata.name }}
 			    			</p>
 			    		</td>
-			    		<td ng-repeat="i in item.podList.items">
-			    			<p> 
+			    		<td>
+			    			<p ng-repeat="i in item.podList.items"> 
 								<span class="state-back">
 									<a  class="state-defult" ng-class="{'state-running': i.status.phase == 'Running','state-pending': i.status.phase == 'Pending','state-failed': i.status.phase == 'Failed','state-succeeded': i.status.phase == 'Succeeded','state-unknown': i.status.phase == 'Unknown'}"></a>
 								</span>
