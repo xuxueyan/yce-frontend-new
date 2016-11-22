@@ -1,18 +1,22 @@
 button {
 	padding: 7px 14px;
 }
-.button-upgrade {
+.button-Upgrade {
 	background: #FFC107;
 }
 
-.button-rollback {
+.button-Rollback {
 	background: #4CAF50;
 }
 
-.button-capacity {
+.button-Capacity {
 	background: #03A9F4;
 }
 
-.button-delete {
+.button-Delete {
 	background: #f44336;
+}
+
+.button-Modify {
+	background: #3F51B5;
 }

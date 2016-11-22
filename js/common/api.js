@@ -122,13 +122,40 @@
     /**
      *
      * appManage 接口
-     * appManageList，发布应用等
+     * 应用管理，发布应用，历史等
      * */
 
      yce.api.appManage = {};
 
      yce.api.appManage.getAppManageList = function (http, data){
         return createRequest(http, '/api/v1/organizations/' + data.orgId + '/users/' + data.userId + '/deployments');
+     }
+
+
+
+     /**
+     *
+     * extensions 接口
+     * 服务管理，创建服务，创建访问点，等
+     * */
+     yce.api.extensions = {};
+
+     yce.api.extensions.getExtensionList = function (http, data){
+        return createRequest(http, '/api/v1/organizations/'+data.orgId+'/users/'+data.userId+'/extensions')
+     }
+
+
+
+
+     /**
+     *
+     * imageManage 接口
+     * 镜像管理，创建镜像 等
+     * */
+     yce.api.imageManage = {};
+     
+     yce.api.imageManage.getExtensionList = function (http, data){
+        return createRequest(http, '/api/v1/registry/images')
      }
 
 

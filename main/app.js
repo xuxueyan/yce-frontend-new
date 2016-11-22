@@ -3,6 +3,9 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
     var yceMain = angular.module('yceMain',['ngRoute', 'atomic-notify', 'ngAnimate', 'repeatFinished', 'ngLoading']);
 
     yceMain.controller('mainController',function($scope, $http){
+        $scope.data = {
+            userName: localStorage.userName
+        }
 
         $scope.quit = function (){
             var data = {
@@ -77,6 +80,22 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                 controller: 'appManageCtrl',
                 resolve: {
                     delay: ctrlRegister('appManageCtrl',['controllers/appManage.js'])
+                }
+            })
+
+            .when('/extensions',{
+                templateUrl: 'views/extensions.html',
+                controller: 'extensionsCtrl',
+                resolve: {
+                    delay: ctrlRegister('extensionsCtrl',['controllers/extensions.js'])
+                }
+            })
+
+            .when('/imageManage',{
+                templateUrl: 'views/imageManage.html',
+                controller: 'imageManageCtrl',
+                resolve: {
+                    delay: ctrlRegister('imageManageCtrl',['controllers/imageManage.js'])
                 }
             })
 
