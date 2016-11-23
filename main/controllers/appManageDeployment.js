@@ -3,8 +3,8 @@ define(function (){
     return function appManageDeploymentCtrl($scope, $http, $rootScope){
 
         $scope.applyData = {
-            "orgName": "", //组织名
             "appName": "", //应用名
+            "orgName": "", //组织名
             "orgId": localStorage.orgId,
             "userId": localStorage.userId,
             "dcIdList": [], //数据中心id值
@@ -19,10 +19,18 @@ define(function (){
                     }
                 },
                 "spec": {
+                    "replicas": 1, // 副本数 Number类型
                     "template": {
                         "spec": {
+                            "volumes":[{
+                                "name": "", //存储卷名字
+                                "hostPath": {
+                                    "path": ""  //存储卷宿主文件
+                                }
+                            }],
                             "containers": [
                                 {
+                                    "name": "", //应用名
                                     //环境变量
                                     "env": [
                                         {
@@ -51,12 +59,27 @@ define(function (){
                                             "protocol": ""
                                         }
                                     ],
-                                    "name": "" //应用名
+                                    "volumeMounts": [
+                                        {
+                                            "name": "", //存储卷名字
+                                            "mountPath": "", //存储卷应用目录
+                                            "readOnly": true //存储卷是否只读
+                                        }
+                                    ]
+                                    //健康检查
+                                    //"livenessProbe": {
+                                    //    "httpGet": {
+                                    //        "path": "", // URL
+                                    //        "port": null  // Port
+                                    //    },
+                                    //    "periodSeconds": null, // 每隔
+                                    //    "initialDelaySeconds": null //生效时间
+                                    //}
                                 }
                             ]
                         }
-                    },
-                    "replicas": 1 // 副本数 Number类型
+                    }
+
                 }
             }
         };
@@ -155,6 +178,17 @@ define(function (){
         };
 
         /**
+         * 添加 删除 HostPath存储卷
+         */
+        $scope.addApplyHostPath = function (){
+            $scope.applyData.deployment.spec.template.spec.containers[0].volumeMounts.push({});
+        };
+
+        $scope.deleteApplyHostPath = function (index){
+            $scope.applyData.deployment.spec.template.spec.containers[0].volumeMounts.splice(index, 1);
+        };
+
+        /**
          * 镜像列表选取
          * @window
          */
@@ -181,16 +215,30 @@ define(function (){
             };
         };
 
+        /**
+         * 监听应用名,赋予(同步)相关值
+         * 可以将应用名的ng-model改为$scope.applyData.deployment.metadata.labels.name
+         * 然后在提交表单时依次赋值
+         */
+        $scope.$watch('applyData.appName', function(newValue){
+            if(newValue){
+                $scope.applyData.deployment.metadata.name = newValue;
+                $scope.applyData.deployment.spec.template.spec.containers[0].name = newValue;
+                $scope.applyData.deployment.metadata.labels.name = newValue;
+            }
 
+        });
 
 
 
             //提交表单
         $scope.applySubmit = function (){
 
+            //数据中心未处理!!!
+            //hostPath!!
+            console.log(JSON.stringify($scope.applyData));
 
         };
-
 
     }
 });
