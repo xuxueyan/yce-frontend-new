@@ -36,7 +36,7 @@
             </div>
             <ul class="user-list">
                 <li ng-repeat="item in ::navList">
-                    <a ng-href="#/{{item.href}}" ng-class="{clicks:item.id + item.name == showSubUser}" ng-click="subUser(item.id, item.name)">
+                    <a ng-href="#/{{item.href}}" ng-click="subUser(item.id, item.name)">
                         <i class="fa {{item.className}}"></i>
                         {{item.name}}
                     </a>
