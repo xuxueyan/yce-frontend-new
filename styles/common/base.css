@@ -61,12 +61,28 @@ a img {
 
 table {
     border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #eaeaea;
 }
 
-td, th {
-    border: 1px solid #000;
-    padding: 0;
+table th,table td {
+    padding: 20px 0;
+    text-align: center;
+    border: 1px solid #eaeaea;
 }
+table th:first-child,table th:first-child {
+    width: 60px;
+}
+
+table td p {
+    padding: 15px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+table td p:last-child {
+    border-bottom: none;
+}
+
 input {
     outline: none;
 }

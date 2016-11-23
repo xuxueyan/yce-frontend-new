@@ -1,9 +1,9 @@
 <div>
 	<h1 class="view-title">
-        镜像管理
+        模板管理
     </h1>
-    <div class="view-content">
 
+    <div class="view-content">
     	<div class="view-content-search clearfix">
 	    	<div class="fr">
 	    		<input type="text" class="search-text fl" placeholder="请输入应用名称..." ng-model="searchInput" />
@@ -16,23 +16,25 @@
 		    	<thead>
 			    	<tr>
 			    		<th>ID</th>
-			    		<th>镜像名称</th>
-                        <th>标签组合</th>
-                        <th>操作</th>							
+			    		<th>模板名称</th>
+			    		<th>应用信息</th>
+			    		<th>服务信息</th>
+			    		<th>创建时间</th>
+			    		<th>创建人员</th>
+			    		<th>操作</th>						
 			    	</tr>
 			    </thead>
-			    <tbody ng-repeat=" item in imageManageList | filter:searchInput ">
+			    <tbody ng-repeat=" item in templateList.templates | filter:searchInput ">
 			    	<tr>
-			    		<td> {{$index+1}}</td>
+			    		<td> {{$index}} </td>
 			    		<td> {{item.name}} </td>
-			    		<td> 
-			    			<p ng-repeat="i in item.tags">
-			    				{{i}} 
-			    			</p>
-			    		</td>
+			    		<td> {{item.deployment.appName}} </td>
+			    		<td> {{item.service.serviceName}} </td>
+			    		<td> {{item.createdAt}} </td>
+			    		<td> {{templateList.users[item.modifiedOp]}} </td>
 			    		<td>
 			    			<span>
-			    				<button class="button-Modify">修改</button>
+			    				<button class="button-Upgrade">更新</button>
 			    				<button class="button-Delete">删除</button>
 			    			</span>
 			    		</td>

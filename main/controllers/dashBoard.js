@@ -2,9 +2,6 @@ define(['echarts'], function (echarts){
 
     return function dashBoardCtrl($scope, $http, atomicNotifyService) {
 
-
-        console.log(atomicNotifyService);
-
         var data = {
             orgId: localStorage.orgId
         };

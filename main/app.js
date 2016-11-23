@@ -5,6 +5,11 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
     yceMain.controller('mainController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope){
 
         $rootScope.window = {};
+
+        //页面显示当前登陆者名称
+        $scope.userName = localStorage.userName;
+
+        //点击右上角退出登录
         $scope.quit = function (){
             var data = {
                 userName: localStorage.userName
@@ -86,6 +91,54 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                     delay: ctrlRegister('appManageDeploymentCtrl',['controllers/appManageDeployment.js'])
                 }
 
+            })
+
+            .when('/extensions',{
+                templateUrl: 'views/extensions.html',
+                controller: 'extensionsCtrl',
+                resolve: {
+                    delay: ctrlRegister('extensionsCtrl',['controllers/extensions.js'])
+                }
+            })
+
+            .when('/imageManage',{
+                templateUrl: 'views/imageManage.html',
+                controller: 'imageManageCtrl',
+                resolve: {
+                    delay: ctrlRegister('imageManageCtrl',['controllers/imageManage.js'])
+                }
+            })
+
+            .when('/tpManage',{
+                templateUrl: 'views/templateManage.html',
+                controller: 'templateManageCtrl',
+                resolve: {
+                    delay: ctrlRegister('templateManageCtrl',['controllers/templateManage.js'])
+                }
+            })
+
+            .when('/userManage',{
+                templateUrl: 'views/userManage.html',
+                controller: 'userManageCtrl',
+                resolve: {
+                    delay: ctrlRegister('userManageCtrl',['controllers/userManage.js'])
+                }
+            })
+
+            .when('/dcManage',{
+                templateUrl: 'views/dcManage.html',
+                controller: 'dataCenterCtrl',
+                resolve: {
+                    delay: ctrlRegister('dataCenterCtrl',['controllers/dcManage.js'])
+                }
+            })
+
+            .when('/orgManage',{
+                templateUrl: 'views/orgManage.html',
+                controller: 'organizationCtrl',
+                resolve: {
+                    delay: ctrlRegister('organizationCtrl',['controllers/orgManage.js'])
+                }
             })
 
             .otherwise({redirectTo: '/appManage'});

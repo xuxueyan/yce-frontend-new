@@ -4,7 +4,6 @@
     </h1>
 
     <div class="view-content">
-
     	<div class="view-content-search clearfix">
 	    	<div class="fr">
 	    		<input type="text" class="search-text fl" placeholder="请输入应用名称..." ng-model="searchInput" />
@@ -28,11 +27,11 @@
 			    </thead>
 			    <tbody ng-repeat=" list in appManageList | filter:searchInput ">
 			    	<tr ng-repeat=" item in list.deployments ">
-			    		<td> {{ $index+1 }}</td>
-			    		<td> {{ item.deploy.metadata.name }} </td>
+			    		<td> {{$index+1}}</td>
+			    		<td> {{item.deploy.metadata.name}} </td>
 			    		<td>
 			    			<p ng-repeat="i in item.podList.items">
-			    				{{ i.metadata.name }}
+			    				{{i.metadata.name}}
 			    			</p>
 			    		</td>
 			    		<td>
@@ -44,11 +43,11 @@
 			    		</td>
 			    		<td>
 			    			<p ng-repeat="i in item.podList.items">
-			    				{{ i.metadata.creationTimestamp }}
+			    				{{i.metadata.creationTimestamp}}
 			    			</p>
 			    		</td>
-			    		<td> {{ list.dcName }} </td>
-			    		<td> {{ item.deploy.spec.selector.matchLabels.author }} </td>
+			    		<td> {{list.dcName}} </td>
+			    		<td> {{item.deploy.spec.selector.matchLabels.author}} </td>
 			    		<td>
 			    			<span>
 			    				<button class="button-upgrade" ng-click="toUpdate()">升级</button>
@@ -69,8 +68,6 @@
 		<div class="window-tab clearfix">
 			<div class="tab-switch fl"></div>
 			<div class="tab-switch fl"></div>
-
 		</div>
 	</window>
-
 </div>

@@ -94,6 +94,9 @@
     yce.api.user.navList = function (http, data){
         return createRequest(http, '/api/v1/organizations/'+ data.orgId +'/users/'+ data.userId+'/navList');
     };
+    yce.api.user.userList = function (http, data){
+        return createRequest(http, '/api/v1/user');
+    }
 
 
 
@@ -120,7 +123,7 @@
 
 
     /**
-     * 应用接口
+     *  接口
      * applymentList，发布应用等
      * */
 
@@ -146,6 +149,62 @@
     yce.api.image.imageList = function (http){
         return createRequest(http, '/api/v1/registry/images');
     };
+
+
+
+
+     /**
+     *
+     * extensions 接口
+     * 服务管理，创建服务，创建访问点，等
+     * */
+     yce.api.extensions = {};
+
+     yce.api.extensions.extensionList = function (http, data){
+        return createRequest(http, '/api/v1/organizations/'+data.orgId+'/users/'+data.userId+'/extensions');
+     }
+
+
+
+
+     /**
+     *
+     * template 接口
+     * 模板管理，模板镜像 等
+     * */
+     yce.api.template = {};
+     
+     yce.api.template.templateList = function (http, data){
+        return createRequest(http, '/api/v1/organizations/'+data.orgId+'/users/'+data.userId+'/templates');
+     }
+
+
+
+
+    /**
+     *
+     * dateCenter 接口
+     * 数据中心管理，添加数据中心 等
+     * */
+     yce.api.dateCenter = {};
+     
+     yce.api.dateCenter.dateCenterList = function (http, data){
+        return createRequest(http, '/api/v1/datacenter');
+     }
+
+
+
+
+    /**
+     *
+     * organization 接口
+     * 组织管理，添加组织 等
+     * */
+     yce.api.organization = {};
+     
+     yce.api.organization.organizationList = function (http, data){
+        return createRequest(http, '/api/v1/organization');
+     }
 
 
 
