@@ -26,8 +26,8 @@
 			    		<th>操作</th>						
 			    	</tr>
 			    </thead>
-			    <tbody ng-repeat=" list in ::appManageList | filter:searchInput ">
-			    	<tr ng-repeat=" item in ::list.deployments ">
+			    <tbody ng-repeat=" list in appManageList | filter:searchInput ">
+			    	<tr ng-repeat=" item in list.deployments ">
 			    		<td> {{ $index+1 }}</td>
 			    		<td> {{ item.deploy.metadata.name }} </td>
 			    		<td>
@@ -36,7 +36,7 @@
 			    			</p>
 			    		</td>
 			    		<td>
-			    			<p ng-repeat="i in item.podList.items"> 
+			    			<p ng-repeat="i in item.podList.items">
 								<span class="state-back">
 									<a  class="state-defult" ng-class="{'state-running': i.status.phase == 'Running','state-pending': i.status.phase == 'Pending','state-failed': i.status.phase == 'Failed','state-succeeded': i.status.phase == 'Succeeded','state-unknown': i.status.phase == 'Unknown'}"></a>
 								</span>
@@ -51,10 +51,17 @@
 			    		<td> {{ item.deploy.spec.selector.matchLabels.author }} </td>
 			    		<td>
 			    			<span>
+<<<<<<< HEAD
 			    				<button class="button-Upgrade">升级</button>
 			    				<button class="button-Rollback">回滚</button>
 			    				<button class="button-Capacity">扩容</button>
 			    				<button class="button-Delete">删除</button>
+=======
+			    				<button class="button-upgrade" ng-click="toUpdate()">升级</button>
+			    				<button class="button-rollback">回滚</button>
+			    				<button class="button-capacity">扩容</button>
+			    				<button class="button-delete">删除</button>
+>>>>>>> 716ae18e74a39f7688c1e83d90c223f79856d598
 			    			</span>
 			    		</td>
 			    	</tr>
@@ -62,4 +69,15 @@
 	    	</table>
     	</div>
     </div>
+
+	<div loading class="loading" total="2" complete="complete"></div>
+
+	<window config="updateConfig" ng-if="window.update">
+		<div class="window-tab clearfix">
+			<div class="tab-switch fl"></div>
+			<div class="tab-switch fl"></div>
+
+		</div>
+	</window>
+
 </div>

@@ -120,16 +120,33 @@
 
 
     /**
-     *
      * appManage 接口
-     * 应用管理，发布应用，历史等
+     * applymentList，发布应用等
      * */
 
-     yce.api.appManage = {};
+    yce.api.apply = {};
 
-     yce.api.appManage.getAppManageList = function (http, data){
+    yce.api.apply.applymentList = function (http, data){
         return createRequest(http, '/api/v1/organizations/' + data.orgId + '/users/' + data.userId + '/deployments');
-     }
+    };
+
+    yce.api.apply.applyInit = function (http, data){
+        return createRequest(http, '/api/v1/organizations/' + data.orgId + '/users/' + data.userId + '/deployments/init');
+    };
+
+
+
+    /**
+     * 镜像接口
+     * imageList
+     * */
+
+    yce.api.image = {};
+
+    yce.api.image.imageList = function (http){
+        return createRequest(http, '/api/v1/registry/images');
+    };
+
 
 
 

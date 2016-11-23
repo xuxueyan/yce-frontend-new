@@ -5,6 +5,9 @@
 
 @import "common/base.css";
 @import "common/directives/loading.css";
+@import "common/directives/window.css";
 @import "lib/animate.css";
 @import "lib/angular-atomic-notify.css";
 @import "lib/font-awesome/css/font-awesome.min.css";
+@import "lib/rzslider.css";
+

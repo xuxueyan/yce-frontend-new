@@ -1,6 +1,11 @@
 button {
 	padding: 7px 14px;
+	outline: none;
+	border: none;
+	color: #fff;
+	cursor: pointer;
 }
+<<<<<<< HEAD
 .button-Upgrade {
 	background: #FFC107;
 }
@@ -19,4 +24,24 @@ button {
 
 .button-Modify {
 	background: #3F51B5;
+}
+
+.button-primary {
+	background-color: #3F51B5;
+}
+
+.button-upgrade {
+	background-color: #FFC107;
+}
+
+.button-rollback {
+	background-color: #4CAF50;
+}
+
+.button-capacity {
+	background-color: #03A9F4;
+}
+
+.button-delete {
+	background-color: #f44336;
 }
