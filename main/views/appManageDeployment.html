@@ -36,7 +36,7 @@
                     <label>镜像:</label>
                     <span>镜像是您创建应用的根据</span>
                 </div>
-                <input type="text" class="form-input" ng-click="getImgList()"
+                <input type="text" class="form-input" ng-click="getImageList()"
                        ng-model="applyData.deployment.spec.template.spec.containers[0].image" readonly>
             </div>
 
@@ -338,16 +338,16 @@
     <window config="imgSelectConfig" ng-if="window.select">
         <div class="window-select clearfix">
             <div class="filter-text">
-                <input type="text">
+                <input type="text" ng-model="imageInput"/>
             </div>
 
 
             <div class="filter-result">
                 <ul class="filter-list">
-                    <li ng-repeat="item in imageList track by $index" class="clearfix"
-                        ng-click="selectImage(item.name)">
+                    <li ng-repeat="item in imageList | filter:imageInput" class="clearfix"
+                        ng-click="selectImage(item)">
                         <i class="fl">{{$index + 1}}</i>
-                        <p>{{item.name}}</p>
+                        <p>{{item}}</p>
                     </li>
                 </ul>
 
