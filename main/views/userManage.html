@@ -1,1 +1,40 @@
-console.log("nihao");
+<div>
+	<h1 class="view-title">
+        应用管理
+    </h1>
+    <div class="view-content">
+    	<div class="view-content-search clearfix">
+	    	<div class="fr">
+	    		<input type="text" class="search-text fl" placeholder="请输入应用名称..." ng-model="searchInput" />
+	    		<span class="fa fa-search search-button fl"></span>
+	    	</div>	
+    	</div>
+    	<div class="appManage-table">
+	    	<table>
+		    	<thead>
+			    	<tr>
+			    		<th>ID</th>
+			    		<th>用户名</th>
+			    		<th>所属组织</th>
+			    		<th>创建时间</th>
+			    		<th>操作</th>				
+			    	</tr>
+			    </thead>
+				<tbody ng-repeat="item in userList.users">
+			    	<tr>
+			    		<td> {{ $index+1 }}</td>
+			    		<td> {{ item.name }} </td>
+			    		<td> {{ userList.orgList[item.orgId] }} </td>
+			    		<td> {{ item.createdAt }} </td>
+			    		<td>
+			    			<span>
+			    				<button class="button-update">更新</button>
+			    				<button class="button-delete">删除</button>
+			    			</span>
+			    		</td>
+			    	</tr>
+			    </tbody>
+	    	</table>
+    	</div>
+    </div>
+</div>

@@ -192,6 +192,20 @@
 
 
 
+     /**
+     *
+     * userManage 接口
+     * 用户管理，添加用户 等
+     * */
+     yce.api.userManage = {};
+     
+     yce.api.userManage.getUserList = function (http, data){
+        return createRequest(http, '/api/v1/user')
+     }
+
+
+
+
 
 
 })(angular);

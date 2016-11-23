@@ -5,6 +5,13 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
     yceMain.controller('mainController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope){
 
         $rootScope.window = {};
+
+        //页面显示当前登陆者名称
+        $scope.data = {
+            userName: localStorage.userName
+        };
+
+        //点击右上角退出登录
         $scope.quit = function (){
             var data = {
                 userName: localStorage.userName
@@ -88,7 +95,6 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
 
             })
 
-<<<<<<< HEAD
             .when('/extensions',{
                 templateUrl: 'views/extensions.html',
                 controller: 'extensionsCtrl',
@@ -113,10 +119,15 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                 }
             })
 
-            .otherwise({redirectTo: '/dashBoard'});
-=======
+            .when('/userManage',{
+                templateUrl: 'views/userManage.html',
+                controller: 'userManageCtrl',
+                resolve: {
+                    delay: ctrlRegister('userManageCtrl',['controllers/userManage.js'])
+                }
+            })
+
             .otherwise({redirectTo: '/appManage'});
->>>>>>> 716ae18e74a39f7688c1e83d90c223f79856d598
     }]);
 
     return yceMain;

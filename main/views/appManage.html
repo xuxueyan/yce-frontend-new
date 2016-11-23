@@ -4,7 +4,6 @@
     </h1>
 
     <div class="view-content">
-
     	<div class="view-content-search clearfix">
 	    	<div class="fr">
 	    		<input type="text" class="search-text fl" placeholder="请输入应用名称..." ng-model="searchInput" />
@@ -51,17 +50,10 @@
 			    		<td> {{ item.deploy.spec.selector.matchLabels.author }} </td>
 			    		<td>
 			    			<span>
-<<<<<<< HEAD
-			    				<button class="button-Upgrade">升级</button>
-			    				<button class="button-Rollback">回滚</button>
-			    				<button class="button-Capacity">扩容</button>
-			    				<button class="button-Delete">删除</button>
-=======
 			    				<button class="button-upgrade" ng-click="toUpdate()">升级</button>
 			    				<button class="button-rollback">回滚</button>
 			    				<button class="button-capacity">扩容</button>
 			    				<button class="button-delete">删除</button>
->>>>>>> 716ae18e74a39f7688c1e83d90c223f79856d598
 			    			</span>
 			    		</td>
 			    	</tr>
@@ -76,8 +68,6 @@
 		<div class="window-tab clearfix">
 			<div class="tab-switch fl"></div>
 			<div class="tab-switch fl"></div>
-
 		</div>
 	</window>
-
 </div>

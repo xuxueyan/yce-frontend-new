@@ -3,6 +3,9 @@
     width: 100%;
     padding-top: 60px;
 }
+.clicks{
+    background: rgba(33, 33, 33, 0.1);
+}
 
 .nav-list {
     position: fixed;
