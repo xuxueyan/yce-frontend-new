@@ -7,9 +7,8 @@
 @import "layouts/content.css";
 
 @import "page/dashBoard.css";
-
 @import "component/view.css";
-
+@import "component/form.css";
 @import "component/search.css";
 
 @import "page/appManage.css";

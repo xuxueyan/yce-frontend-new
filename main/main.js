@@ -4,12 +4,15 @@ requirejs.config({
         angular: '../lib/angular.min',
         angularRouter: '../lib/angular-route.min',
         angularAnimate: '../lib/angular-animate.min',
+        ngSilder: '../lib/angular-slider',
         ngNotify: '../lib/angular-atomic-notify',
         api: '../js/common/api',
         utils: '../js/common/utils',
         repeatFinished: '../js/directives/repeatFinished',
         echarts: '../lib/echarts',
-        ngLoading: '../js/directives/ngLoading'
+        ngLoading: '../js/directives/ngLoading',
+        ngWindow: '../js/directives/ngWindow',
+        ngPaging: '../js/directives/ngPaging',
     },
     shim: {
         'angular': {
@@ -21,6 +24,9 @@ requirejs.config({
             exports: 'ngRoute'
         },
         angularAnimate: {
+            deps: ['angular']
+        },
+        ngSilder: {
             deps: ['angular']
         },
         ngNotify: {
@@ -37,7 +43,14 @@ requirejs.config({
         },
         ngLoading: {
             deps: ['angular']
+        },
+        ngWindow: {
+            deps: ['angular']
+        },
+        ngPaging: {
+            deps: ['angular']
         }
+
     }
 });
 

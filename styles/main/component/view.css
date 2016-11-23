@@ -2,15 +2,20 @@
     margin-left: 260px;
     padding: 30px;
     position: relative;
+    height: 100%;
+    color: #767676;
 }
 .view-title {
-    color: #767676;
-    font-size: 25px;
-    margin-bottom: 20px;
+    font-size: 30px;
+    margin-bottom: 30px;
+
 }
 .view-content {
 	background: #fff;
 	box-shadow: 0 0 10px 0 rgba(33,33,33,.2);
-	margin-top: 30px;
 	padding: 30px;
+}
+.view-content-title {
+    font-size: 20px;
+
 }

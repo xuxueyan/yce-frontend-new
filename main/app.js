@@ -1,9 +1,10 @@
-define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils', 'repeatFinished', 'ngLoading'], function(angular){
+define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils', 'repeatFinished', 'ngLoading', 'ngWindow', 'ngSilder'], function(angular){
 
-    var yceMain = angular.module('yceMain',['ngRoute', 'atomic-notify', 'ngAnimate', 'repeatFinished', 'ngLoading']);
+    var yceMain = angular.module('yceMain',['ngRoute', 'atomic-notify', 'ngAnimate', 'repeatFinished', 'ngLoading', 'ngWinodw', 'rzModule']);
 
-    yceMain.controller('mainController',function($scope, $http){
+    yceMain.controller('mainController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope){
 
+        $rootScope.window = {};
         $scope.quit = function (){
             var data = {
                 userName: localStorage.userName
@@ -44,7 +45,7 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
         };
 
 
-    });
+    }]);
 
     yceMain.config(['$routeProvider', '$controllerProvider', function ($routeProvider, $controllerProvider){
 
@@ -71,7 +72,6 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                 }
 
             })
-
             .when('/appManage', {
                 templateUrl: 'views/appManage.html',
                 controller: 'appManageCtrl',
@@ -79,8 +79,16 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                     delay: ctrlRegister('appManageCtrl',['controllers/appManage.js'])
                 }
             })
+            .when('/appManageDeployment', {
+                templateUrl: 'views/appManageDeployment.html',
+                controller: 'appManageDeploymentCtrl',
+                resolve: {
+                    delay: ctrlRegister('appManageDeploymentCtrl',['controllers/appManageDeployment.js'])
+                }
 
-            .otherwise({redirectTo: '/dashBoard'});
+            })
+
+            .otherwise({redirectTo: '/appManage'});
     }]);
 
     return yceMain;
