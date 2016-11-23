@@ -193,7 +193,7 @@ define(function (){
          * @window
          */
 
-        $scope.getImgList = function (){
+        $scope.getImageList = function (){
             $rootScope.window.select = true;
 
             $scope.imgSelectConfig = {
@@ -204,7 +204,7 @@ define(function (){
             var imageListToken = yce.api.image.imageList($http);
             utils.responseHandler(imageListToken, function(data){
                 if(data.code == 0){
-                    $scope.imageList = JSON.parse(data.data);
+                    $scope.imageList = JSON.parse(data.data).images;
                 }
             });
 
