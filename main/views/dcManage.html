@@ -22,7 +22,7 @@
 			    		<th>操作</th>		
 			    	</tr>
 			    </thead>
-				<tbody ng-repeat="item in dataCenterList.datacenters">
+				<tbody ng-repeat="item in dataCenterList.datacenters | filter:searchInput">
 			    	<tr>
 			    		<td> {{$index+1}}</td>
 			    		<td> {{item.name}} </td>

@@ -27,11 +27,11 @@
 			    </thead>
 			    <tbody ng-repeat=" list in appManageList | filter:searchInput ">
 			    	<tr ng-repeat=" item in list.deployments ">
-			    		<td> {{ $index+1 }}</td>
-			    		<td> {{ item.deploy.metadata.name }} </td>
+			    		<td> {{$index+1}}</td>
+			    		<td> {{item.deploy.metadata.name}} </td>
 			    		<td>
 			    			<p ng-repeat="i in item.podList.items">
-			    				{{ i.metadata.name }}
+			    				{{i.metadata.name}}
 			    			</p>
 			    		</td>
 			    		<td>
@@ -43,11 +43,11 @@
 			    		</td>
 			    		<td>
 			    			<p ng-repeat="i in item.podList.items">
-			    				{{ i.metadata.creationTimestamp }}
+			    				{{i.metadata.creationTimestamp}}
 			    			</p>
 			    		</td>
-			    		<td> {{ list.dcName }} </td>
-			    		<td> {{ item.deploy.spec.selector.matchLabels.author }} </td>
+			    		<td> {{list.dcName}} </td>
+			    		<td> {{item.deploy.spec.selector.matchLabels.author}} </td>
 			    		<td>
 			    			<span>
 			    				<button class="button-upgrade" ng-click="toUpdate()">升级</button>

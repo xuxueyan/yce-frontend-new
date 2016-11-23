@@ -24,14 +24,14 @@
                         <th>操作</th>						
 			    	</tr>
 			    </thead>
-			    <tbody ng-repeat=" list in ::extensionsList | filter:searchInput ">
-			    	<tr ng-repeat=" item in ::list.serviceList.items ">
-			    		<td> {{ $index+1 }}</td>
-			    		<td> {{ item.metadata.name }} </td>
-			    		<td> {{ item.metadata.labels.author }} </td>
-			    		<td> {{ list.dcName }} </td>
+			    <tbody ng-repeat=" item in extensionsList | filter:searchInput ">
+			    	<tr ng-repeat=" i in ::item.serviceList.items ">
+			    		<td> {{$index+1}}</td>
+			    		<td> {{i.metadata.name}} </td>
+			    		<td> {{i.metadata.labels.author}} </td>
+			    		<td> {{item.dcName}} </td>
 			    		<td> 服务 </td>
-			    		<td>{{ item.metadata.creationTimestamp }}</td>
+			    		<td>{{i.metadata.creationTimestamp}}</td>
 			    		<td>
 			    			<span>
 			    				<button class="button-Modify">修改</button>

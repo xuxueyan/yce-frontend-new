@@ -6,7 +6,7 @@ define(function (){
             userId: localStorage.userId
         };
         function extensionsInitFn() {
-            var extensionsListToken = yce.api.extensions.ExtensionList($http, data);
+            var extensionsListToken = yce.api.extensions.extensionList($http, data);
 
             utils.responseHandler(extensionsListToken, function(data){
 

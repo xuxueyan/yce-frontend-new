@@ -24,14 +24,14 @@
 			    		<th>操作</th>						
 			    	</tr>
 			    </thead>
-			    <tbody ng-repeat=" item in ::templateList.templates | filter:searchInput ">
+			    <tbody ng-repeat=" item in templateList.templates | filter:searchInput ">
 			    	<tr>
-			    		<td> {{ $index }} </td>
-			    		<td> {{ item.name }} </td>
-			    		<td> {{ item.deployment.appName }} </td>
-			    		<td> {{ item.service.serviceName }} </td>
-			    		<td> {{ item.createdAt }} </td>
-			    		<td> {{ templateList.users[item.modifiedOp] }} </td>
+			    		<td> {{$index}} </td>
+			    		<td> {{item.name}} </td>
+			    		<td> {{item.deployment.appName}} </td>
+			    		<td> {{item.service.serviceName}} </td>
+			    		<td> {{item.createdAt}} </td>
+			    		<td> {{templateList.users[item.modifiedOp]}} </td>
 			    		<td>
 			    			<span>
 			    				<button class="button-Upgrade">更新</button>

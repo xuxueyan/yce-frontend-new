@@ -7,9 +7,7 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
         $rootScope.window = {};
 
         //页面显示当前登陆者名称
-        $scope.data = {
-            userName: localStorage.userName
-        };
+        $scope.userName = localStorage.userName;
 
         //点击右上角退出登录
         $scope.quit = function (){

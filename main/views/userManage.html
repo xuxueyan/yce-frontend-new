@@ -20,12 +20,12 @@
 			    		<th>操作</th>				
 			    	</tr>
 			    </thead>
-				<tbody ng-repeat="item in userList.users">
+				<tbody ng-repeat="item in userList.users | filter:searchInput">
 			    	<tr>
-			    		<td> {{ $index+1 }}</td>
-			    		<td> {{ item.name }} </td>
-			    		<td> {{ userList.orgList[item.orgId] }} </td>
-			    		<td> {{ item.createdAt }} </td>
+			    		<td> {{$index+1}}</td>
+			    		<td> {{item.name}} </td>
+			    		<td> {{userList.orgList[item.orgId]}} </td>
+			    		<td> {{item.createdAt}} </td>
 			    		<td>
 			    			<span>
 			    				<button class="button-update">更新</button>

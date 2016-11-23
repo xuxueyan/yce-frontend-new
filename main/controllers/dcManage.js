@@ -12,8 +12,8 @@ define(function (){
 
             utils.responseHandler(dataCenterListToken, function(data){
                 $scope.dataCenterList = JSON.parse(data.data);
-                angular.forEach($scope.dataCenterList.datacenters, function(i){
-                    i.nodePort = JSON.parse(i.nodePort)
+                angular.forEach($scope.dataCenterList.datacenters, function(data){
+                    data.nodePort = JSON.parse(data.nodePort)
                 })
             });
         };

@@ -23,7 +23,7 @@
 			    		<th>操作</th>
 			    	</tr>
 			    </thead>
-				<tbody ng-repeat="item in organizationList.organizations">
+				<tbody ng-repeat="item in organizationList.organizations | filter:searchInput">
 			    	<tr>
 			    		<td> {{$index+1}}</td>
 			    		<td> {{item.name}} </td>

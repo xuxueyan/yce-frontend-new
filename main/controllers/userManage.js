@@ -8,7 +8,7 @@ define(function (){
         };
         //用户列表获取
         function userInitFn() {
-            var userListToken = yce.api.user.UserList($http, data);
+            var userListToken = yce.api.user.userList($http, data);
 
             utils.responseHandler(userListToken, function(data){
                 $scope.userList = JSON.parse(data.data);

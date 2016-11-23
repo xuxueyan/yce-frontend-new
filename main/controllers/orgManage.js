@@ -12,8 +12,8 @@ define(function (){
 
             utils.responseHandler(organizationListToken, function(data){
                 $scope.organizationList = JSON.parse(data.data);
-                angular.forEach($scope.organizationList.organizations, function(i){
-                    i.dcIdList = JSON.parse(i.dcIdList)
+                angular.forEach($scope.organizationList.organizations, function(data){
+                    data.dcIdList = JSON.parse(data.dcIdList)
                 })
             });
         };

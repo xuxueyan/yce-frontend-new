@@ -94,8 +94,8 @@
     yce.api.user.navList = function (http, data){
         return createRequest(http, '/api/v1/organizations/'+ data.orgId +'/users/'+ data.userId+'/navList');
     };
-    yce.api.user.UserList = function (http, data){
-        return createRequest(http, '/api/v1/user')
+    yce.api.user.userList = function (http, data){
+        return createRequest(http, '/api/v1/user');
     }
 
 
@@ -160,8 +160,8 @@
      * */
      yce.api.extensions = {};
 
-     yce.api.extensions.ExtensionList = function (http, data){
-        return createRequest(http, '/api/v1/organizations/'+data.orgId+'/users/'+data.userId+'/extensions')
+     yce.api.extensions.extensionList = function (http, data){
+        return createRequest(http, '/api/v1/organizations/'+data.orgId+'/users/'+data.userId+'/extensions');
      }
 
 
@@ -175,7 +175,7 @@
      yce.api.template = {};
      
      yce.api.template.templateList = function (http, data){
-        return createRequest(http, '/api/v1/organizations/'+data.orgId+'/users/'+data.userId+'/templates')
+        return createRequest(http, '/api/v1/organizations/'+data.orgId+'/users/'+data.userId+'/templates');
      }
 
 
@@ -189,7 +189,7 @@
      yce.api.dateCenter = {};
      
      yce.api.dateCenter.dateCenterList = function (http, data){
-        return createRequest(http, '/api/v1/datacenter')
+        return createRequest(http, '/api/v1/datacenter');
      }
 
 
@@ -203,7 +203,7 @@
      yce.api.organization = {};
      
      yce.api.organization.organizationList = function (http, data){
-        return createRequest(http, '/api/v1/organization')
+        return createRequest(http, '/api/v1/organization');
      }
 
 

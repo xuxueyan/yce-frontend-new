@@ -13,8 +13,8 @@ define(function (){
             utils.responseHandler(templateListToken, function(data){
 
                 $scope.templateList = JSON.parse(data.data)
-                angular.forEach($scope.templateList.templates, function(i){
-                    i.deployment = JSON.parse(i.deployment);
+                angular.forEach($scope.templateList.templates, function(data){
+                    data.deployment = JSON.parse(data.deployment);
                 });
             });
         };
