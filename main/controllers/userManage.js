@@ -6,13 +6,12 @@ define(function (){
             orgId: localStorage.orgId,
             userId: localStorage.userId
         };
-        //模板列表获取
+        //用户列表获取
         function userInitFn() {
-            var userListToken = yce.api.userManage.getUserList($http, data);
+            var userListToken = yce.api.user.UserList($http, data);
 
             utils.responseHandler(userListToken, function(data){
                 $scope.userList = JSON.parse(data.data);
-                console.log(angular.toJson($scope.userList));
             });
         };
         userInitFn();

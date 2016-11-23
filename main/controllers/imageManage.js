@@ -7,7 +7,7 @@ define(function (){
             userId: localStorage.userId
         };
         function imageManageInitFn() {
-            var imageManageListToken = yce.api.imageManage.getExtensionList($http, data);
+            var imageManageListToken = yce.api.image.imageList($http, data);
 
             utils.responseHandler(imageManageListToken, function(data){
 

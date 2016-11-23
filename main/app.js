@@ -127,6 +127,22 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                 }
             })
 
+            .when('/dcManage',{
+                templateUrl: 'views/dcManage.html',
+                controller: 'dataCenterCtrl',
+                resolve: {
+                    delay: ctrlRegister('dataCenterCtrl',['controllers/dcManage.js'])
+                }
+            })
+
+            .when('/orgManage',{
+                templateUrl: 'views/orgManage.html',
+                controller: 'organizationCtrl',
+                resolve: {
+                    delay: ctrlRegister('organizationCtrl',['controllers/orgManage.js'])
+                }
+            })
+
             .otherwise({redirectTo: '/appManage'});
     }]);
 

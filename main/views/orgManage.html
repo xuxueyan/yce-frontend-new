@@ -1,6 +1,6 @@
 <div>
 	<h1 class="view-title">
-        用户管理
+        组织管理
     </h1>
     <div class="view-content">
     	<div class="view-content-search clearfix">
@@ -14,18 +14,24 @@
 		    	<thead>
 			    	<tr>
 			    		<th>ID</th>
-			    		<th>用户名</th>
-			    		<th>所属组织</th>
+			    		<th>组织名称</th>
+			    		<th>CPU</th>
+			    		<th>MEM</th>
+			    		<th>账户余额</th>
 			    		<th>创建时间</th>
-			    		<th>操作</th>				
+			    		<th>数据中心</th>
+			    		<th>操作</th>
 			    	</tr>
 			    </thead>
-				<tbody ng-repeat="item in userList.users">
+				<tbody ng-repeat="item in organizationList.organizations">
 			    	<tr>
-			    		<td> {{ $index+1 }}</td>
-			    		<td> {{ item.name }} </td>
-			    		<td> {{ userList.orgList[item.orgId] }} </td>
-			    		<td> {{ item.createdAt }} </td>
+			    		<td> {{$index+1}}</td>
+			    		<td> {{item.name}} </td>
+			    		<td> {{item.cpu_quota}} </td>
+			    		<td> {{item.mem_quota}} </td>
+			    		<td> {{item.balance}} </td>
+			    		<td> {{item.createdAt}}</td>
+			    		<td> {{organizationList.dcList[item.dcIdList.dcIdList]}} </td>
 			    		<td>
 			    			<span>
 			    				<button class="button-update">更新</button>

@@ -94,6 +94,9 @@
     yce.api.user.navList = function (http, data){
         return createRequest(http, '/api/v1/organizations/'+ data.orgId +'/users/'+ data.userId+'/navList');
     };
+    yce.api.user.UserList = function (http, data){
+        return createRequest(http, '/api/v1/user')
+    }
 
 
 
@@ -120,7 +123,7 @@
 
 
     /**
-     * appManage 接口
+     *  接口
      * applymentList，发布应用等
      * */
 
@@ -157,7 +160,7 @@
      * */
      yce.api.extensions = {};
 
-     yce.api.extensions.getExtensionList = function (http, data){
+     yce.api.extensions.ExtensionList = function (http, data){
         return createRequest(http, '/api/v1/organizations/'+data.orgId+'/users/'+data.userId+'/extensions')
      }
 
@@ -166,41 +169,41 @@
 
      /**
      *
-     * imageManage 接口
-     * 镜像管理，创建镜像 等
-     * */
-     yce.api.imageManage = {};
-     
-     yce.api.imageManage.getExtensionList = function (http, data){
-        return createRequest(http, '/api/v1/registry/images')
-     }
-
-
-
-
-     /**
-     *
-     * templateManage 接口
+     * template 接口
      * 模板管理，模板镜像 等
      * */
      yce.api.template = {};
      
-     yce.api.template.getTemplateList = function (http, data){
+     yce.api.template.templateList = function (http, data){
         return createRequest(http, '/api/v1/organizations/'+data.orgId+'/users/'+data.userId+'/templates')
      }
 
 
 
 
-     /**
+    /**
      *
-     * userManage 接口
-     * 用户管理，添加用户 等
+     * dateCenter 接口
+     * 数据中心管理，添加数据中心 等
      * */
-     yce.api.userManage = {};
+     yce.api.dateCenter = {};
      
-     yce.api.userManage.getUserList = function (http, data){
-        return createRequest(http, '/api/v1/user')
+     yce.api.dateCenter.dateCenterList = function (http, data){
+        return createRequest(http, '/api/v1/datacenter')
+     }
+
+
+
+
+    /**
+     *
+     * organization 接口
+     * 组织管理，添加组织 等
+     * */
+     yce.api.organization = {};
+     
+     yce.api.organization.organizationList = function (http, data){
+        return createRequest(http, '/api/v1/organization')
      }
 
 

@@ -8,7 +8,7 @@ define(function (){
         };
         //模板列表获取
         function templateInitFn() {
-            var templateListToken = yce.api.template.getTemplateList($http, data);
+            var templateListToken = yce.api.template.templateList($http, data);
 
             utils.responseHandler(templateListToken, function(data){
 
