@@ -105,6 +105,11 @@ form .fa:hover {
     border: 1px solid #e1e1e1;
     padding: 6px 8px;
 }
+.input-group input[type=radio] {
+    margin-top: 8px;
+    margin-left: 50px;
+}
+
 .input-group-name {
     background-color: #f5f5f5;
 }

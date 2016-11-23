@@ -10,14 +10,14 @@
                     <label>应用名:</label>
                     <span>应用名是您将要创建的应用的名称,组织内唯一</span>
                 </div>
-                <input type="text" class="form-input" ng-model="applyData.deployment.metadata.name">
+                <input type="text" class="form-input" ng-model="applyData.appName">
             </div>
             <div class="form-group">
                 <div class="form-desc">
                     <label>组织名:</label>
                     <span>组织名是您应用所属的组织名称</span>
                 </div>
-                <input type="text" class="form-input" ng-model="applyData.deployment.metadata.namespace" readonly>
+                <input type="text" class="form-input" ng-model="applyData.orgName" readonly>
             </div>
             <div class="form-group">
                 <div class="form-desc">
@@ -148,7 +148,7 @@
 
                     <div class="input-group fl">
                         <span class="input-group-name fl">Value</span>
-                        <input type="text" class="input-two fl" ng-model="applyData.deployment.metadata.name"/>
+                        <input type="text" class="input-two fl" ng-model="applyData.deployment.metadata.labels.name"/>
                     </div>
                 </div>
                 <div class="repeat-group clearfix">
@@ -195,7 +195,7 @@
 
             <div class="form-group">
                 <div class="form-desc">
-                    <input type="checkbox"/>
+                    <input type="checkbox" ng-click="livenessProbe = !livenessProbe" ng-init="livenessProbe = true"/>
                     <label>健康检查</label>
                     <span>确定应用的健康程度(默认时间为秒)</span>
                 </div>
@@ -203,61 +203,75 @@
                 <div class="repeat-group">
                     <div class="input-group clearfix">
                         <span class="input-group-name fl">URL </span>
-                        <input type="text" class="input-one fl" readonly/>
+                        <input type="text" class="input-one fl"
+                               ng-model="applyData.deployment.spec.template.spec.containers[0].livenessProbe.httpGet.path"
+                               ng-readonly="livenessProbe"/>
                     </div>
                 </div>
 
                 <div class="repeat-group">
                     <div class="input-group clearfix">
                         <span class="input-group-name fl">Port</span>
-                        <input type="text" class="input-one fl" readonly/>
+                        <input type="number" class="input-one fl"
+                               ng-model="applyData.deployment.spec.template.spec.containers[0].livenessProbe.httpGet.port"
+                               ng-readonly="livenessProbe"/>
                     </div>
                 </div>
                 <div class="repeat-group">
                     <div class="input-group clearfix">
                         <span class="input-group-name fl">每隔</span>
-                        <input type="number" class="input-one fl" readonly/>
+                        <input type="number" class="input-one fl"
+                               ng-model="applyData.deployment.spec.template.spec.containers[0].livenessProbe.periodSeconds"
+                               ng-readonly="livenessProbe"/>
 
                     </div>
                 </div>
                 <div class="repeat-group">
                     <div class="input-group clearfix">
                         <span class="input-group-name fl">生效</span>
-                        <input type="number" class="input-one fl" readonly/>
+                        <input type="number" class="input-one fl"
+                               ng-model="applyData.deployment.spec.template.spec.containers[0].livenessProbe.initialDelaySeconds"
+                               ng-readonly="livenessProbe"/>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-desc clearfix">
-                    <input type="checkbox"/>
+                    <input type="checkbox" ng-click="hostPath = !hostPath" ng-init="hostPath = true"/>
                     <label>存储卷</label>
-                    <i class="fa fa-plus-square fr"></i>
+                    <i class="fa fa-plus-square fr" ng-click="addApplyHostPath()"></i>
                 </div>
 
-                <div class="repeat-group">
-                    <div class="input-group clearfix">
-                        <span class="input-group-name fl">名称</span>
-                        <input type="text" class="input-one fl" readonly/>
+                <div ng-repeat="item in applyData.deployment.spec.template.spec.containers[0].volumeMounts">
+                    <i class="fa fa-minus-square fr" ng-click="deleteApplyHostPath($index)"></i>
+                    <div class="repeat-group">
+                        <div class="input-group clearfix">
+                            <span class="input-group-name fl">名称</span>
+                            <input type="text" class="input-one fl" ng-model="item.name" ng-readonly="hostPath"/>
+                        </div>
                     </div>
-                </div>
 
-                <div class="repeat-group">
-                    <div class="input-group clearfix">
-                        <span class="input-group-name fl">目录</span>
-                        <input type="text" class="input-one fl" readonly/>
+                    <div class="repeat-group">
+                        <div class="input-group clearfix">
+                            <span class="input-group-name fl">目录</span>
+                            <input type="text" class="input-one fl" ng-model="item.mountPath" ng-readonly="hostPath"/>
+                        </div>
                     </div>
-                </div>
-                <div class="repeat-group">
-                    <div class="input-group clearfix">
-                        <span class="input-group-name fl">宿主</span>
-                        <input type="number" class="input-one fl" readonly/>
+                    <div class="repeat-group">
+                        <div class="input-group clearfix">
+                            <span class="input-group-name fl">宿主</span>
+                            <input type="number" class="input-one fl"
+                                   ng-model="applyData.deployment.spec.template.spec.volumes[$index].hostPath.path"
+                                   ng-readonly="hostPath"/>
 
+                        </div>
                     </div>
-                </div>
-                <div class="repeat-group">
-                    <div class="input-group clearfix">
-                        <span class="input-group-name fl">只读</span>
-
+                    <div class="repeat-group">
+                        <div class="input-group clearfix">
+                            <span class="input-group-name fl">只读</span>
+                            <input type="radio" name="hostPath{{$index}}" ng-value="true" ng-model="item.readOnly" ng-disabled="hostPath" /> 是
+                            <input type="radio" name="hostPath{{$index}}" ng-value="false" ng-model="item.readOnly" ng-disabled="hostPath"/> 否
+                        </div>
                     </div>
                 </div>
             </div>
@@ -312,7 +326,7 @@
             </div>
 
             <div class="form-group clearfix">
-                <button class="btn button-primary fl">提交</button>
+                <button class="btn button-primary fl" ng-click="applySubmit()">提交</button>
                 <a href="javascript:;" class="more-setting fr" ng-click="expertConfig = false; basicConfig = true;">返回基础配置</a>
             </div>
 
