@@ -1,0 +1,47 @@
+<div>
+	<h1 class="view-title">
+        模板管理
+    </h1>
+
+    <div class="view-content">
+
+    	<div class="view-content-search clearfix">
+	    	<div class="fr">
+	    		<input type="text" class="search-text fl" placeholder="请输入应用名称..." ng-model="searchInput" />
+	    		<span class="fa fa-search search-button fl"></span>
+	    	</div>	
+    	</div>
+
+    	<div class="appManage-table">
+	    	<table>
+		    	<thead>
+			    	<tr>
+			    		<th>ID</th>
+			    		<th>模板名称</th>
+			    		<th>应用信息</th>
+			    		<th>服务信息</th>
+			    		<th>创建时间</th>
+			    		<th>创建人员</th>
+			    		<th>操作</th>						
+			    	</tr>
+			    </thead>
+			    <tbody ng-repeat=" item in ::templateList.templates | filter:searchInput ">
+			    	<tr>
+			    		<td> {{ $index }} </td>
+			    		<td> {{ item.name }} </td>
+			    		<td> {{ item.deployment.appName }} </td>
+			    		<td> {{ item.service.serviceName }} </td>
+			    		<td> {{ item.createdAt }} </td>
+			    		<td> {{ templateList.users[item.modifiedOp] }} </td>
+			    		<td>
+			    			<span>
+			    				<button class="button-Upgrade">更新</button>
+			    				<button class="button-Delete">删除</button>
+			    			</span>
+			    		</td>
+			    	</tr>
+			    </tbody>
+	    	</table>
+    	</div>
+    </div>
+</div>

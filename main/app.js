@@ -99,6 +99,14 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                 }
             })
 
+            .when('/tpManage',{
+                templateUrl: 'views/templateManage.html',
+                controller: 'templateManageCtrl',
+                resolve: {
+                    delay: ctrlRegister('templateManageCtrl',['controllers/templateManage.js'])
+                }
+            })
+
             .otherwise({redirectTo: '/dashBoard'});
     }]);
 

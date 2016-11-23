@@ -161,5 +161,20 @@
 
 
 
+     /**
+     *
+     * templateManage 接口
+     * 模板管理，模板镜像 等
+     * */
+     yce.api.template = {};
+     
+     yce.api.template.getTemplateList = function (http, data){
+        return createRequest(http, '/api/v1/organizations/'+data.orgId+'/users/'+data.userId+'/templates')
+     }
+
+
+
+
+
 
 })(angular);
