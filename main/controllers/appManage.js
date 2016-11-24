@@ -7,6 +7,9 @@ define(function (){
     		userId: localStorage.userId
     	};
 
+		//初始化loading
+		$scope.complete = 0;
+
     	function appManageInitFn() {
 
     		var appManageListToken = yce.api.apply.applymentList($http, data);
@@ -14,13 +17,12 @@ define(function (){
     			if(data.code == 0){
     				$scope.appManageList = JSON.parse(data.data);
 					$scope.complete++;
+
 				}
     		});
 
     	}
     	appManageInitFn();
-
-
 
 
 		$scope.toUpdate = function (){
