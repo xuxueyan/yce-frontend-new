@@ -35,7 +35,6 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                 if(data.code == 0){
                     var data = JSON.parse(data.data);
                     $scope.navList = data.list;
-
                     $scope.complete++;
 
                 }

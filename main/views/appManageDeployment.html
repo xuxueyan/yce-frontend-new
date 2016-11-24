@@ -160,7 +160,7 @@
 
                     <div class="input-group fl">
                         <span class="input-group-name fl">Value</span>
-                        <input type="text" class="input-two fl"/>
+                        <input type="text" class="input-two fl" ng-model="applyData.deployment.metadata.labels.version"/>
                     </div>
                 </div>
                 <div class="repeat-group clearfix">
@@ -340,8 +340,6 @@
             <div class="filter-text">
                 <input type="text" ng-model="imageInput"/>
             </div>
-
-
             <div class="filter-result">
                 <ul class="filter-list">
                     <li ng-repeat="item in imageList | filter:imageInput" class="clearfix"
@@ -352,9 +350,9 @@
                 </ul>
 
             </div>
-
-
         </div>
     </window>
 
+    <div loading class="loading" total="1" complete="complete"></div>
+    <ng-atomic-notify></ng-atomic-notify>
 </div>

@@ -6,7 +6,14 @@ define(function (){
     		orgId: localStorage.orgId,
     		userId: localStorage.userId
     	};
+<<<<<<< HEAD
         $scope.complete = 0;
+=======
+
+		//初始化loading
+		$scope.complete = 0;
+
+>>>>>>> b910a2b93d87f352b5c0aafbca5a16462646d44d
     	function appManageInitFn() {
 
     		var appManageListToken = yce.api.apply.applymentList($http, data);
@@ -15,6 +22,7 @@ define(function (){
     			if(data.code == 0){
     				$scope.appManageList = JSON.parse(data.data);
 					$scope.complete++;
+
 				}
     		});
 
@@ -22,6 +30,7 @@ define(function (){
     	appManageInitFn();
 
 
+<<<<<<< HEAD
 
         //点击“升级”按钮
 		$scope.toUpdate = function (dcName, item, dcId){
@@ -44,6 +53,10 @@ define(function (){
             $scope.param.dcIdList.push(dcId);
 
 			$rootScope.window.update = true;
+
+		$scope.toUpdate = function (){
+			$rootScope.window.handle = true;
+            
 			$scope.updateConfig = {
 				id: 'update',
 				title: '升级'

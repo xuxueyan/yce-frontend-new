@@ -94,9 +94,9 @@
     yce.api.user.navList = function (http, data){
         return createRequest(http, '/api/v1/organizations/'+ data.orgId +'/users/'+ data.userId+'/navList');
     };
-    yce.api.user.userList = function (http, data){
+    yce.api.user.userList = function (http){
         return createRequest(http, '/api/v1/user');
-    }
+    };
 
 
 
@@ -123,7 +123,7 @@
 
 
     /**
-     *  接口
+     *  应用接口
      * applymentList，发布应用等
      * */
 
@@ -135,6 +135,9 @@
 
     yce.api.apply.applyInit = function (http, data){
         return createRequest(http, '/api/v1/organizations/' + data.orgId + '/users/' + data.userId + '/deployments/init');
+    };
+    yce.api.apply.applySubmit = function (http, data){
+        return createRequest(http, '/api/v1/organizations/' + data.orgId + '/users/' + data.userId + '/deployments/new', POST, data);
     };
 
 
@@ -191,7 +194,7 @@
      * */
      yce.api.dateCenter = {};
      
-     yce.api.dateCenter.dateCenterList = function (http, data){
+     yce.api.dateCenter.dateCenterList = function (http){
         return createRequest(http, '/api/v1/datacenter');
      }
 
@@ -205,7 +208,7 @@
      * */
      yce.api.organization = {};
      
-     yce.api.organization.organizationList = function (http, data){
+     yce.api.organization.organizationList = function (http){
         return createRequest(http, '/api/v1/organization');
      }
 
