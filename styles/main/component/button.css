@@ -25,22 +25,16 @@ button {
 	background: #3F51B5;
 }
 
-.button-primary {
+.button-Primary {
 	background-color: #3F51B5;
 }
-
-.button-upgrade {
-	background-color: #FFC107;
+.button-Submit {
+	background-color: #3f52b5;
+}
+.button-Updata {
+	background-color: #ccc;
+}
+.button-Cancel {
+	background-color: #9e9e9e;
 }
 
-.button-rollback {
-	background-color: #4CAF50;
-}
-
-.button-capacity {
-	background-color: #03A9F4;
-}
-
-.button-delete {
-	background-color: #f44336;
-}

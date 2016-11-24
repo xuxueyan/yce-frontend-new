@@ -149,6 +149,9 @@
     yce.api.image.imageList = function (http){
         return createRequest(http, '/api/v1/registry/images');
     };
+    yce.api.image.postimageList = function(http, data){
+        return createRequest(http, '/api/v1/organizations/' + data.orgId + '/deployments/' + data.appName + '/rolling', POST, data);
+    }
 
 
 
