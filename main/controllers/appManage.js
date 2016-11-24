@@ -24,9 +24,9 @@ define(function (){
 
 
 		$scope.toUpdate = function (){
-			$rootScope.window.update = true;
+			$rootScope.window.handle = true;
 			$scope.updateConfig = {
-				id: 'update',
+				id: 'handle',
 				title: '升级'
 
 			};
