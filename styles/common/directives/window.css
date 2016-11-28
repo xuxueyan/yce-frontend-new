@@ -48,9 +48,13 @@
     background: #767676;
     color: #fff;
 }
-#update .window {
+#update .window, #capacity .window, #applyRollback .window {
     height: 600px;
     width: 750px;
+}
+#applyDelete .window {
+    width: 400px;
+    height: 250px;
 }
 
 .window-tab {
@@ -71,19 +75,19 @@
     cursor: default;
 }
 
-.tab-form {
+.tab-content {
     border: 1px solid #ccc;
-    height: 300px;
     margin-top: 1px;
-    padding: 38px;
+    padding: 30px;
 }
 .tab-content p {
     font-size: 14px;
-    line-height: 40px;
+    line-height: 37px;
 }
 .tab-content p input {
     width: 460px;
     height: 28px;
+    color: #767676;
 }
 
 .tab-content p input {
@@ -92,27 +96,17 @@
 
 .button-wrap {
     width: 100%;
-    padding-top: 35px;
+    margin-top: 30px;
     text-align: center;
 }
-
-
-
-
-
-
 
 .active {
     border-bottom: 1px solid #fff;
     background: #fff;
 }
-.show{
-    display: none;
-}
 .active:hover{
     background: #fff;
 }
-
 
 #select .window {
     width: 800px;
@@ -165,3 +159,49 @@
 .filter-list li p {
     text-indent: 10px;
 }
+
+.timeline:before {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 10px;
+    background-color: #eaeaea;
+    left: 50%;
+    margin-left: -5px;
+    border-radius: 5px;
+}
+
+.rollback-ul li span{
+    width: 280px;
+    height: 190px;
+    display: inline-block;
+    box-shadow: 3px 3px 12px #ccc;
+}
+.rollback-ul:before {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 10px;
+    background-color: #eaeaea;
+    left: 50%;
+    margin-left: 35px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

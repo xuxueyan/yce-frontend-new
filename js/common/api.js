@@ -124,7 +124,7 @@
 
     /**
      *  应用接口
-     * applymentList，发布应用等
+     * applymentList 发布应用Init applySubmit 升级 扩容 删除
      * */
 
     yce.api.apply = {};
@@ -139,6 +139,15 @@
     yce.api.apply.applySubmit = function (http, data){
         return createRequest(http, '/api/v1/organizations/' + data.orgId + '/users/' + data.userId + '/deployments/new', POST, data);
     };
+    yce.api.apply.update = function(http, data){
+        return createRequest(http, '/api/v1/organizations/' + data.orgId + '/deployments/' + data.appName + '/rolling', POST, data);
+    }
+    yce.api.apply.capacity = function(http, data){
+        return createRequest(http, '/api/v1/organizations/' + data.orgId + '/deployments/' + data.appName + '/scale', POST, data);
+    }
+    yce.api.apply.applyDelete = function(http, data){
+        return createRequest(http, '/api/v1/organizations/' + data.orgId + '/deployments/' + data.appName + '/delete', POST, data);
+    }
 
 
 
@@ -152,9 +161,6 @@
     yce.api.image.imageList = function (http){
         return createRequest(http, '/api/v1/registry/images');
     };
-    yce.api.image.postimageList = function(http, data){
-        return createRequest(http, '/api/v1/organizations/' + data.orgId + '/deployments/' + data.appName + '/rolling', POST, data);
-    }
 
 
 

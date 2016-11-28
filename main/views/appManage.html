@@ -50,10 +50,10 @@
 			    		<td> {{item.deploy.spec.selector.matchLabels.author}} </td>
 			    		<td>
 			    			<span>
-			    				<button class="button-Upgrade" ng-click="toUpdate(list.dcName,item,list.dcId)">升级</button>
-			    				<button class="button-Rollback">回滚</button>
-			    				<button class="button-Capacity">扩容</button>
-			    				<button class="button-Delete">删除</button>
+			    				<button class="button-update" ng-click="toUpdate(list.dcName,item,list.dcId)">升级</button>
+			    				<button class="button-rollback" ng-click="applyRollback(item)">回滚</button>
+			    				<button class="button-capacity" ng-click="toCapacity(list.dcId,item)">扩容</button>
+			    				<button class="button-delete" ng-click="toApplyDelete(list.dcId,item)">删除</button>
 			    			</span>
 			    		</td>
 			    	</tr>
@@ -64,25 +64,24 @@
 
 	<div loading class="loading" total="1" complete="complete"></div>
 
+	<!-- 升级镜像页面 -->
 	<window config="updateConfig" ng-if="window.update">
-		<div class="window-tab clearfix">
-			<div class="tab-switch fl" ng-class="{active:tabSwitch==0}" ng-init="tabSwitch=0" ng-click="tabSwitch=0">
+		<div class="window-tab clearfix" ng-init="tabSwitch=0">
+			<div class="tab-switch fl" ng-class="{active:tabSwitch == 0}" ng-click="tabSwitch = 0">
 				<i class="fa fa-home"></i> 滚动升级
 			</div>
-			<div class="tab-switch fl" ng-class="{active:tabSwitch==1}" ng-click="tabSwitch=1">
+			<div class="tab-switch fl" ng-class="{active:tabSwitch == 1}" ng-click="tabSwitch = 1">
 				<i class="fa fa-user"></i> 立即升级
 			</div>
 		</div>
-
-
-		<form class="tab-form" ng-submit="submit(param)" name="dataSubmit">
-			<div class="tab-content" ng-class="{'active show':tabSwitch==1}">
+		<div class="tab-content" ng-show="tabSwitch == 0">
+			<form name="updateForm">
 				<div>
 					<p>
 						<span>应用名称：</span> <b>应用名错误</b>
 					</p>
 					<p>
-						<input type="text" ng-model="param.appName" readonly />
+						<input type="text" ng-model="upDateData.appName" readonly />
 					</p>
 				</div>
 				<div>
@@ -90,12 +89,12 @@
 						<span>数据中心：</span> <b></b>
 					</p>
 					<p>
-						<input type="text" ng-model="dcName" disabled />
+						<input type="text" ng-model="dcName" readonly />
 					</p>
 				</div>
 				<div>
 					<p>
-						<span>升级镜像：</span> <b ng-show="rollShow">镜像名称不统一</b>
+						<span>升级镜像：</span> <b ng-show="errorPrompt">镜像名称不统一</b>
 					</p>
 					<p>
 						<input type="text" ng-click="getImageList()" ng-model="image" required  readonly/>
@@ -106,27 +105,24 @@
 						<span>升级原因：</span> <b></b>
 					</p>
 					<p>
-						<input type="text" ng-model="param.comments" />
+						<input type="text" ng-model="upDateData.comments" />
 					</p>
 				</div>
-			</div>
-			<div class="tab-content" ng-class="{'active show':tabSwitch==0}">qwe</div>
-		
-			<div class="button-wrap">
-				<button class="button-Submit" ng-disabled="dataSubmit.$invalid">提交</button>
-				<!-- <input type="button" class="button-submit" id="select" value="取消"> -->
-			</div>
-		</form>
-
-
+				<div class="button-wrap">
+					<button class="button-submit" ng-click="updateSubmit()" ng-disabled="updateForm.$invalid">提交</button>
+					<button class="button-submit">取消</button>
+				</div>
+			</form>
+		</div>
+		<div class="tab-content" ng-show="tabSwitch == 1"></div>
 	</window>
+
+	<!-- 镜像选取列表 -->
 	<window config="imgSelectConfig" ng-if="window.select">
         <div class="window-select clearfix">
             <div class="filter-text">
                 <input type="text" ng-model="imageInput"/>
             </div>
-
-
             <div class="filter-result">
                 <ul class="filter-list">
                     <li ng-repeat="item in imageList | filter:imageInput" class="clearfix"
@@ -135,13 +131,95 @@
                         <p>{{item}}</p>
                     </li>
                 </ul>
-
             </div>
-
-
         </div>
     </window>
 
+    <!-- 扩容 -->
+    <window config="capacityConfig" ng-if="window.capacity">
+		<div class="window-tab clearfix" ng-init="tabSwitch=0">
+			<div class="tab-switch fl" ng-class="{active:tabSwitch == 0}" ng-click="tabSwitch = 0">
+				<i class="fa fa-home"></i> 自动扩容
+			</div>
+			<div class="tab-switch fl" ng-class="{active:tabSwitch == 1}" ng-click="tabSwitch = 1">
+				<i class="fa fa-user"></i> 手动扩容
+			</div>
+		</div>
+		<div class="tab-content" ng-show="tabSwitch == 0">
+			<form name="capacityForm">
+				<div>
+					<p>
+						<span>应用名称：</span> <b>应用名错误</b>
+					</p>
+					<p>
+						<input type="text" ng-model="capacityData.appName" readonly />
+					</p>
+				</div>
+				<div>
+					<p>
+						<span>镜像名称：</span> <b></b>
+					</p>
+					<p>
+						<input type="text" ng-model="capacityData.imageName" readonly />
+					</p>
+				</div>
+				<div>
+					<p>
+						<span>实例个数：</span> <b></b>
+					</p>
+					<p> 
+						<rzslider rz-slider-model="capacityData.newSize"
+                          rz-slider-options="slider.options"></rzslider>
+	 				</p>
+				</div>
+				<div class="button-wrap">
+					<button class="button-submit" ng-click="capacitySubmit()" ng-disabled="capacityForm.$invalid">提交</button>
+					<button class="button-submit">取消</button>
+				</div>
+			</form>
+		</div>
+		<div class="tab-content" ng-show="tabSwitch == 1"></div>
+	</window>
 
+	<!-- 删除 -->
+	<window config="applyDeleteConfig" ng-if="window.applyDelete">
+		<div class="window-tab clearfix" ng-init="tabSwitch=0">
+			<p>您确定删除么？</p>
+		</div>
+		<div class="button-wrap">
+			<button class="button-submit" ng-click="applyDeleteSubmit()" >确定</button>
+			<button class="button-submit">取消</button>
+		</div>
+	</window>
+
+	<!-- 回滚 -->
+	<window config="applyRollbackConfig" ng-if="window.applyRollback">
+		<div class="window-tab clearfix" ng-init="tabSwitch=0">
+			<ul class="rollback-ul">
+				<li>
+					<span class="fl">11</span>
+					<span class="fl">22</span>
+				</li>
+			</ul>
+			
+
+		</div>
+		<div class="button-wrap">
+			<button class="button-submit" ng-click="applyDeleteSubmit()" >确定</button>
+			<button class="button-submit">取消</button>
+		</div>
+	</window>
+
+
+
+
+
+
+
+
+
+
+
+    <ng-atomic-notify></ng-atomic-notify>
 
 </div>
