@@ -5,42 +5,25 @@ button {
 	color: #fff;
 	cursor: pointer;
 }
-.button-Upgrade {
+.button-update {
 	background: #FFC107;
 }
 
-.button-Rollback {
+.button-rollback {
 	background: #4CAF50;
 }
 
-.button-Capacity {
+.button-capacity {
 	background: #03A9F4;
 }
 
-.button-Delete {
+.button-delete {
 	background: #f44336;
 }
 
-.button-Modify {
-	background: #3F51B5;
+.button-submit {
+	background: #3f52b5;
 }
-
-.button-primary {
-	background-color: #3F51B5;
-}
-
-.button-upgrade {
-	background-color: #FFC107;
-}
-
-.button-rollback {
-	background-color: #4CAF50;
-}
-
-.button-capacity {
-	background-color: #03A9F4;
-}
-
-.button-delete {
-	background-color: #f44336;
+.button-modify {
+	background: #673AB7;
 }
