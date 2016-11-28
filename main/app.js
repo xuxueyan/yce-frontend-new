@@ -99,6 +99,13 @@ define(['angular', 'angularRouter', 'ngNotify', 'angularAnimate', 'api', 'utils'
                     delay: ctrlRegister('extensionsCtrl',['controllers/extensions.js'])
                 }
             })
+            .when('/extensionsService',{
+                templateUrl: 'views/extensionsService.html',
+                controller: 'extensionsServiceCtrl',
+                resolve: {
+                    delay: ctrlRegister('extensionsServiceCtrl',['controllers/extensionsService.js'])
+                }
+            })
 
             .when('/imageManage',{
                 templateUrl: 'views/imageManage.html',

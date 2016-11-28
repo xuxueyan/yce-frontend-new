@@ -271,7 +271,7 @@ define(function (){
             }
 
             //标签组 key&value
-            if($scope.labelArray.length !=0){
+            if($scope.labelArray.length >0){
                 angular.forEach($scope.labelArray, function (data, index){
                     $scope.applyData.deployment.metadata.labels[data.key] = data.value;
 
@@ -284,7 +284,6 @@ define(function (){
             var applyToken = yce.api.apply.applySubmit($http, $scope.applyData);
 
 
-            console.log(JSON.stringify($scope.applyData));
             utils.responseHandler(applyToken, function(data){
                 if(data.code == 0){
                     $timeout(function(){
