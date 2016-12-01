@@ -1,0 +1,1 @@
+define(function(){return function($scope,$http){function e(){var e=yce.api.template.templateList($http,t);utils.responseHandler(e,function(e){$scope.templateList=JSON.parse(e.data),angular.forEach($scope.templateList.templates,function(e){e.deployment=JSON.parse(e.deployment)})})}var t={orgId:localStorage.orgId,userId:localStorage.userId};e()}});

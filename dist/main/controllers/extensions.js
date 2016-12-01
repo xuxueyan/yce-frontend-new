@@ -1,0 +1,1 @@
+define(function(){return function($scope,$http){function e(){var e=yce.api.extensions.extensionList($http,n);utils.responseHandler(e,function(e){$scope.extensionsList=JSON.parse(e.data)})}var n={orgId:localStorage.orgId,userId:localStorage.userId};e()}});

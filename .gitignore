@@ -1,0 +1,7 @@
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+#node_modules ignore
+#node_modules/

@@ -1,0 +1,48 @@
+/**
+ * @desc: 登陆页样式
+ * @author: Mark
+ */
+
+body {
+    background: url('../../images/login-bg.png') #3F51B5;
+}
+.login {
+    width: 500px;
+    height: 450px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 100px;
+    position: relative;
+    color: #fff;
+}
+.login-form {
+    padding: 0 85px;
+}
+.login-title {
+    font-size: 40px;
+    line-height: 90px;
+
+}
+.login-input-title {
+    line-height: 23px;
+    text-align: left;
+}
+.login-input, .login-btn {
+    box-sizing: content-box;
+    font-size: 19px;
+    width: 100%;
+    outline: none;
+    color: #3e3e3e;
+    padding: 9px;
+    margin: 15px 0;
+    border: 1px solid transparent ;
+}
+.login-btn {
+    background: #E91E63;
+    color: #fff;
+    cursor: pointer;
+}
+.login-btn:hover {
+    background: #AD1457;
+}
+

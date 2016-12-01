@@ -1,0 +1,373 @@
+<div ng-init="basicConfig = true">
+    <h1 class="view-title">应用发布</h1>
+    <div class="view-content" ng-show="basicConfig">
+        <h1 class="view-content-title">
+            基本配置
+        </h1>
+        <form name="basic">
+            <div class="form-group">
+                <div class="form-desc">
+                    <label>应用名:</label>
+                </div>
+                <input type="text" class="form-input" name="applyName"
+                       ng-pattern="/^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/"
+                       ng-model="applyData.appName" required>
+
+                <div class="form-error animated" ng-show="applyNameExist">应用名已存在,请重新输入</div>
+                <div class="form-error animated" ng-show="basic.applyName.$error.pattern">应用名格式错误</div>
+            </div>
+            <div class="form-group">
+                <div class="form-desc">
+                    <label>组织名:</label>
+                    <span>组织名是您应用所属的组织名称</span>
+                </div>
+                <input type="text" class="form-input" ng-model="applyData.orgName" readonly>
+            </div>
+            <div class="form-group">
+                <div class="form-desc">
+                    <label>数据中心:</label>
+                    <span>数据中心是您的应用将要部署到的位置</span>
+                </div>
+                <div class="form-data-center clearfix">
+                    <label class="fl" ng-repeat="item in dataCenters" ng-class="{'active': applyData.dcIdList[$index]}">
+                        {{item.name}}
+                        <input type="checkbox" ng-model="applyData.dcIdList[$index]" ng-true-value="{{item.id}}">
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-desc">
+                    <label>镜像:</label>
+                    <span>镜像是您创建应用的根据</span>
+                </div>
+                <input type="text" class="form-input" ng-click="getImageList()"
+                       ng-model="applyData.deployment.spec.template.spec.containers[0].image" readonly required>
+            </div>
+
+            <div class="form-group">
+                <div class="form-desc">
+                    <label>副本数:</label>
+                    <span>副本数是您创建应用的实例个数(1-10)</span>
+                </div>
+
+                <rzslider rz-slider-model="applyData.deployment.spec.replicas"
+                          rz-slider-options="slider.options"></rzslider>
+            </div>
+
+            <div class="form-group">
+                <div class="form-desc">
+                    <label>规格:</label>
+                    <span>规格是您为应用所申请的资源规格</span>
+                </div>
+
+                <div class="form-resource clearfix" ng-init="resource = {}">
+                    <label class="fl" ng-repeat="item in quotas" ng-class="{'active': resource.check == item.id}">
+                        <h1 class="form-resource-title">{{item.name}}</h1>
+                        <p class="form-resource-txt">
+                            CPU: {{item.cpu}}G
+                            <br/>
+                            MEM: {{item.mem}}G
+                        </p>
+                        <input type="radio" name="resource" ng-model="resource.check" value="{{item.id}}"
+                               ng-change="applyData.deployment.spec.template.spec.containers[0].resources.limits.cpu = item.cpu + '000m';
+                               applyData.deployment.spec.template.spec.containers[0].resources.limits.memory = item.mem + '000M';">
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-desc clearfix">
+                    <label class="fl">环境变量:</label>
+                    <i class="fa fa-plus-square fr" ng-click="addApplyEnv()"></i>
+                </div>
+                <div class="repeat-group clearfix"
+                     ng-repeat="item in applyData.deployment.spec.template.spec.containers[0].env">
+
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">Name</span>
+                        <input type="text" class="input-two fl" name="envName" ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]*$/"
+                               ng-model="item.name" required>
+                    </div>
+                    <div class="input-group-connect fl">—</div>
+
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">Value</span>
+                        <input type="text" class="input-two fl" ng-model="item.value" required>
+                    </div>
+                    <i class="fa fa-minus-square fr" ng-click="deleteApplyEnv($index)"></i>
+                </div>
+                <div class="form-error animated" ng-show="basic.envName.$error.pattern">环境变量名格式错误</div>
+
+            </div>
+            <div class="form-group">
+                <div class="form-desc clearfix">
+                    <label class="fl">开放端口:</label>
+                    <i class="fa fa-plus-square fr" ng-click="addApplyPort()"></i>
+                </div>
+                <div class="repeat-group clearfix"
+                     ng-repeat="item in applyData.deployment.spec.template.spec.containers[0].ports">
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">名称</span>
+                        <input type="text" class="input-thr fl" ng-model="item.name" name="portName"
+                               ng-pattern="/^[a-z0-9]([-a-z0-9]*[a-z0-9])?$/" required>
+                    </div>
+                    <div class="input-group-connect fl">—</div>
+
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">端口</span>
+                        <input type="number" name="containerPort" class="input-thr fl" ng-model="item.containerPort"
+                               ng-pattern="/^([1-9]|[1-9]\d|[1-9]\d{2}|[1-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/"
+                               required>
+                    </div>
+
+                    <div class="input-group fl input-protocal">
+                        <span class="input-group-name fl">协议</span>
+                        <select class="input-thr fl" ng-model="item.protocol"
+                                ng-options="x for x in protocolArray"></select>
+                    </div>
+
+                    <i class="fa fa-minus-square fr" ng-click="deleteApplyPort($index)"></i>
+                </div>
+                <div class="form-error animated" ng-show="basic.portName.$error.pattern">开放端口名格式错误</div>
+                <div class="form-error animated" ng-show="basic.containerPort.$error.pattern">开放端口请输入1 - 65535的数字</div>
+
+            </div>
+            <div class="form-group clearfix">
+                <button class="btn button-submit fl" ng-click="applySubmit()" ng-disabled="basic.$invalid">提交</button>
+                <a href="javascript:;" class="more-setting fr" ng-click="expertConfig = true; basicConfig = false;">更多高级配置</a>
+            </div>
+        </form>
+    </div>
+    <div class="view-content" ng-show="expertConfig">
+        <h1 class="view-content-title">
+            高级配置
+        </h1>
+
+        <form name="apply">
+
+            <div class="form-group">
+                <div class="form-desc clearfix">
+                    <label class="fl">标签组:</label>
+                    <i class="fa fa-plus-square fr" ng-click="addApplyLabel()"></i>
+                </div>
+                <div class="repeat-group clearfix">
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">Key</span>
+                        <input type="text" class="input-two fl" value="Name"/>
+                    </div>
+                    <div class="input-group-connect fl">—</div>
+
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">Value</span>
+                        <input type="text" class="input-two fl" ng-model="applyData.deployment.metadata.labels.name"/>
+                    </div>
+                </div>
+                <div class="repeat-group clearfix">
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">Key</span>
+                        <input type="text" class="input-two fl" value="Version"/>
+                    </div>
+                    <div class="input-group-connect fl">—</div>
+
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">Value</span>
+                        <input type="text" class="input-two fl"
+                               ng-model="applyData.deployment.metadata.labels.version"/>
+                    </div>
+                </div>
+                <div class="repeat-group clearfix">
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">Key</span>
+                        <input type="text" class="input-two fl" value="Author"/>
+                    </div>
+                    <div class="input-group-connect fl">—</div>
+
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">Value</span>
+                        <input type="text" class="input-two fl" ng-model="applyData.deployment.metadata.labels.author"/>
+                    </div>
+                </div>
+
+                <div class="repeat-group clearfix" ng-repeat="item in applyLabelArray">
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">Key</span>
+                        <input type="text" class="input-two fl" ng-model="item.key" required/>
+                    </div>
+                    <div class="input-group-connect fl">—</div>
+
+                    <div class="input-group fl">
+                        <span class="input-group-name fl">Value</span>
+                        <input type="text" class="input-two fl" ng-model="item.value" required/>
+                    </div>
+                    <i class="fa fa-minus-square fr" ng-click="deleteApplyLabel($index)"></i>
+                </div>
+
+
+            </div>
+
+            <div class="form-group">
+                <div class="form-desc">
+                    <input type="checkbox" ng-click="livenessProbe = !livenessProbe" ng-init="livenessProbe = true"/>
+                    <label>健康检查</label>
+                    <span>确定应用的健康程度(默认时间为秒)</span>
+                </div>
+
+                <div class="repeat-group">
+                    <div class="input-group">
+                        <p>URL:</p>
+                        <input type="text" class="input-one"
+                               ng-model="applyData.deployment.spec.template.spec.containers[0].livenessProbe.httpGet.path"
+                               ng-readonly="livenessProbe" required/>
+                    </div>
+                </div>
+
+                <div class="repeat-group">
+                    <div class="input-group">
+                        <p>Port:</p>
+                        <input type="number" class="input-one"
+                               ng-model="applyData.deployment.spec.template.spec.containers[0].livenessProbe.httpGet.port"
+                               ng-pattern="/^([1-9]|[1-9]\d|[1-9]\d{2}|[1-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/"
+                               ng-readonly="livenessProbe"/>
+                    </div>
+                </div>
+                <div class="repeat-group">
+                    <div class="input-group">
+                        <p>每隔:</p>
+                        <input type="number" class="input-one"
+                               ng-model="applyData.deployment.spec.template.spec.containers[0].livenessProbe.periodSeconds"
+                               ng-readonly="livenessProbe"/>
+
+                    </div>
+                </div>
+                <div class="repeat-group">
+                    <div class="input-group">
+                        <p>生效时间:</p>
+                        <input type="number" class="input-one"
+                               ng-model="applyData.deployment.spec.template.spec.containers[0].livenessProbe.initialDelaySeconds"
+                               ng-readonly="livenessProbe"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-desc clearfix">
+                    <input type="checkbox" ng-click="hostPath = !hostPath" ng-init="hostPath = true"/>
+                    <label>存储卷</label>
+                    <i class="fa fa-plus-square fr" ng-click="addApplyHostPath()"></i>
+                </div>
+
+                <div ng-repeat="item in applyData.deployment.spec.template.spec.containers[0].volumeMounts">
+                    <i class="fa fa-minus-square fr" ng-click="deleteApplyHostPath($index)"></i>
+                    <div class="repeat-group">
+                        <div class="input-group">
+                            <p>名称:</p>
+                            <input type="text" class="input-one" ng-model="item.name" ng-readonly="hostPath"/>
+                        </div>
+                    </div>
+
+                    <div class="repeat-group">
+                        <div class="input-group">
+                            <p>应用目录:</p>
+                            <input type="text" class="input-one" ng-model="item.mountPath" ng-readonly="hostPath"/>
+                        </div>
+                    </div>
+                    <div class="repeat-group">
+                        <div class="input-group">
+                            <p>宿主目录:</p>
+                            <input type="number" class="input-one"
+                                   ng-model="applyData.deployment.spec.template.spec.volumes[$index].hostPath.path"
+                                   ng-readonly="hostPath"/>
+
+                        </div>
+                    </div>
+                    <div class="repeat-group">
+                        <div class="input-group">
+                            <p>只读:</p>
+                            <input type="radio" name="hostPath{{$index}}" ng-value="true" ng-model="item.readOnly"
+                                   ng-disabled="hostPath"/> 是
+                            <input type="radio" name="hostPath{{$index}}" ng-value="false" ng-model="item.readOnly"
+                                   ng-disabled="hostPath"/> 否
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-desc">
+                    <input type="checkbox"/>
+                    <label>启动准备</label>
+                </div>
+                <div class="repeat-group">
+                    <div class="input-group clearfix">
+                        <span class="input-group-name fl">脚本</span>
+                        <input type="text" class="input-one fl" readonly/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-desc">
+                    <input type="checkbox"/>
+                    <label>优雅停止</label>
+                </div>
+                <div class="repeat-group">
+                    <div class="input-group clearfix">
+                        <span class="input-group-name fl">脚本</span>
+                        <input type="text" class="input-one fl" readonly/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-desc">
+                    <input type="checkbox"/>
+                    <label>执行命令</label>
+                </div>
+                <div class="repeat-group">
+                    <div class="input-group clearfix">
+                        <span class="input-group-name fl">脚本</span>
+                        <input type="text" class="input-one fl" readonly/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-desc">
+                    <input type="checkbox"/>
+                    <label>参数</label>
+                </div>
+                <div class="repeat-group">
+                    <div class="input-group clearfix">
+                        <span class="input-group-name fl">脚本</span>
+                        <input type="text" class="input-one fl" readonly/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group clearfix">
+                <button class="btn button-submit fl" ng-click="applySubmit()">提交</button>
+                <a href="javascript:;" class="more-setting fr" ng-click="expertConfig = false; basicConfig = true;">返回基础配置</a>
+            </div>
+
+
+        </form>
+    </div>
+
+
+    <window config="imgSelectConfig" ng-if="window.select">
+        <div class="window-select clearfix">
+            <div class="filter-text">
+                <input type="text" ng-model="imageInput"/>
+            </div>
+            <div class="filter-result">
+                <ul class="filter-list">
+                    <li ng-repeat="item in imageList | filter:imageInput" class="clearfix"
+                        ng-click="selectImage(item)">
+                        <i class="fl">{{$index + 1}}</i>
+                        <p>{{item}}</p>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </window>
+
+    <div loading class="loading" total="1" complete="complete"></div>
+    <ng-atomic-notify></ng-atomic-notify>
+</div>

@@ -1,0 +1,44 @@
+<div>
+	<h1 class="view-title">
+        数据中心管理
+    </h1>
+    <div class="view-content">
+    	<div class="view-content-search clearfix">
+	    	<div class="fr">
+	    		<input type="text" class="search-text fl" placeholder="请输入应用名称..." ng-model="searchInput" />
+	    		<span class="fa fa-search search-button fl"></span>
+	    	</div>	
+    	</div>
+    	<div class="appManage-table">
+	    	<table>
+		    	<thead>
+			    	<tr>
+			    		<th>ID</th>
+			    		<th>数据中心名</th>
+			    		<th>地址</th>
+			    		<th>端口</th>
+			    		<th>NodePort</th>
+			    		<th>创建时间</th>
+			    		<th>操作</th>		
+			    	</tr>
+			    </thead>
+				<tbody ng-repeat="item in dataCenterList.datacenters | filter:searchInput">
+			    	<tr>
+			    		<td> {{$index+1}}</td>
+			    		<td> {{item.name}} </td>
+			    		<td> {{item.host}} </td>
+			    		<td> {{item.port}} </td>
+			    		<td> {{item.nodePort.nodePort[0]}} -  {{item.nodePort.nodePort[1]}}</td>
+			    		<td> {{item.createdAt}} </td>
+			    		<td>
+			    			<span>
+			    				<button class="button-update">更新</button>
+			    				<button class="button-delete">删除</button>
+			    			</span>
+			    		</td>
+			    	</tr>
+			    </tbody>
+	    	</table>
+    	</div>
+    </div>
+</div>

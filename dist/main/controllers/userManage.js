@@ -1,0 +1,1 @@
+define(function(){return function($scope,$http){function r(){var r=yce.api.user.userList($http,e);utils.responseHandler(r,function(r){$scope.userList=JSON.parse(r.data)})}var e={orgId:localStorage.orgId,userId:localStorage.userId};r()}});
