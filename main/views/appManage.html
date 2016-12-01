@@ -28,9 +28,9 @@
 			    <tbody ng-repeat=" list in appManageList | filter:searchInput ">
 			    	<tr ng-repeat=" item in list.deployments ">
 			    		<td> {{$index+1}}</td>
-			    		<td> {{item.deploy.metadata.name}} </td>
+			    		<td class="hover-hand" ng-click="showAppDeployDetail(item.deploy)"> {{item.deploy.metadata.name}} </td>
 			    		<td>
-			    			<p ng-repeat="i in item.podList.items">
+			    			<p class="hover-hand" ng-repeat="i in item.podList.items" ng-click="showAppPodDetail(i, list.dcId)">
 			    				{{i.metadata.name}}
 			    			</p>
 			    		</td>
@@ -51,7 +51,7 @@
 			    		<td>
 			    			<span>
 			    				<button class="button-update" ng-click="toUpdate(list.dcName,item,list.dcId)">升级</button>
-			    				<button class="button-rollback" ng-click="applyRollback(item)">回滚</button>
+			    				<button class="button-rollback" ng-click="applyRollback(item,list.dcId)">回滚</button>
 			    				<button class="button-capacity" ng-click="toCapacity(list.dcId,item)">扩容</button>
 			    				<button class="button-delete" ng-click="toApplyDelete(list.dcId,item)">删除</button>
 			    			</span>
@@ -183,9 +183,7 @@
 
 	<!-- 删除 -->
 	<window config="applyDeleteConfig" ng-if="window.applyDelete">
-		<div class="window-tab clearfix" ng-init="tabSwitch=0">
-			<p>您确定删除么？</p>
-		</div>
+		<p>您确定删除么？</p>
 		<div class="button-wrap">
 			<button class="button-submit" ng-click="applyDeleteSubmit()" >确定</button>
 			<button class="button-submit">取消</button>
@@ -194,31 +192,89 @@
 
 	<!-- 回滚 -->
 	<window config="applyRollbackConfig" ng-if="window.applyRollback">
-		<div class="window-tab clearfix" ng-init="tabSwitch=0">
-			<ul class="rollback-ul">
-				<li>
-					<span class="fl">11</span>
-					<span class="fl">22</span>
-				</li>
-			</ul>
-			
+		<ul class="rollbackul">
+			<li ng-repeat="item in historyDate" ng-class-odd="'add-fl'" class="clearfix">
+				<div class="timeline-badge">
+	                <i class="fa fa-share"></i>
+	            </div>
+	            <div class="rollbackul-li-content" >
+                    <h4>{{item.name}}</h4>
+                    <p>
+                        <span><i class="fa fa-time"></i>修订版本 {{item.revision}}</span>
+                    </p>
+                    <p>镜像名称: {{item.image}}</p>
+                    <p>应用实例数: {{item.replicas.current}} 可用 | {{item.replicas.desire}} 期望</p>
+                    <button class="button-delete" ng-click="historyRollback(item)">回滚到此版本</button>
+	            </div>
 
-		</div>
-		<div class="button-wrap">
-			<button class="button-submit" ng-click="applyDeleteSubmit()" >确定</button>
-			<button class="button-submit">取消</button>
-		</div>
+			</li>
+		</ul>
 	</window>
 
+	<!-- 点击应用名称 -->
+	<window config="deployDetailConfig" ng-if="window.deployDetail">
+		<div class="window-tab clearfix" ng-init="tabSwitch=0">
+			<div class="tab-switch fl" ng-class="{active:tabSwitch == 0}" ng-click="tabSwitch = 0">
+				<i class="fa fa-home"></i> 详细信息
+			</div>
+		</div>
+		<div class="tab-content deploy-detail">
+			<h4>应用名称 : {{deployDetailDate.name}}</h4>
+			<p>
+				<span>组织名称 : {{deployDetailDate.metadata.namespace}}</span>
+				<span>镜像名称: {{deployDetailDate.spec.template.spec.containers[0].image}}</span>
+			</p>
+			<p>
+				<span>启动时间 : {{deployDetailDate.metadata.creationTimestamp}}</span>
+				<span>升级策略: {{deployDetailDate.spec.strategy.type}}</span>
+			</p>
+			<h4>标签组</h4>
+			<p ng-repeat="(key,value) in deployDetailDate.metadata.labels" ng-class-odd="'bg-f9'">
+				{{key}} :	{{value}}
+			</p>
 
-
-
-
-
-
-
-
-
+			<h4>选择器</h4>
+			<p ng-repeat="(key,value) in deployDetailDate.spec.selector.matchLabels" ng-class-odd="'bg-f9'">
+				{{key}} :	{{value}}
+			</p>
+		</div>
+	</window>
+	
+	<!-- 应用实例 -->
+	<window config="appPodDetailConfig" ng-if="window.appPodDetail">
+		<div class="window-tab clearfix" ng-init="tabSwitch=0">
+			<div class="tab-switch fl" ng-class="{active:tabSwitch == 0}" ng-click="tabSwitch = 0">
+				<i class="fa fa-home"></i> 详情信息
+			</div>
+			<div class="tab-switch fl" ng-class="{active:tabSwitch == 1}" ng-click="tabSwitch = 1">
+				<i class="fa fa-user"></i> 日志
+			</div>
+		</div>
+		<div class="tab-content deploy-detail" ng-show="tabSwitch == 0">
+			<h4>应用名称 : {{appPodDetailDate.metadata.name}}</h4>
+			<p>
+				<span>组织名称 : {{appPodDetailDate.metadata.namespace}}</span>
+				<span>镜像名称: {{appPodDetailDate.spec.containers[0].image}}</span>
+			</p>
+			<p>
+				<span>启动时间 : {{appPodDetailDate.metadata.creationTimestamp}}</span>
+				<span>计算节点: {{appPodDetailDate.spec.nodeName}}</span>
+			</p>
+			<p>
+				<span>当前状态 : {{appPodDetailDate.status.phase}}</span>
+				<span>容器地址: {{appPodDetailDate.status.podIP}}</span>
+			</p>
+			<p>
+				<span>开放端口 : {{appPodDetailDate.spec.containers[0].ports[0].containerPort}}</span>
+				<span>重启次数: {{appPodDetailDate.status.containerStatuses[0].restartCount}}</span>
+			</p>
+			<h4>标签组</h4>
+			<p ng-repeat="(key,value) in appPodDetailDate.metadata.labels" ng-class-odd="'bg-f9'">
+				{{key}} :	{{value}}
+			</p>
+		</div>
+		<div class="tab-content" ng-show="tabSwitch == 1"></div>
+	</window>
 
     <ng-atomic-notify></ng-atomic-notify>
 

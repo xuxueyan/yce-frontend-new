@@ -48,10 +48,17 @@
     background: #767676;
     color: #fff;
 }
-#update .window, #capacity .window, #applyRollback .window {
+
+#update .window, 
+#capacity .window, 
+#applyRollback .window, 
+#deployDetail .window,
+#appPodDetail .window
+{
     height: 600px;
     width: 750px;
 }
+
 #applyDelete .window {
     width: 400px;
     height: 250px;
@@ -160,36 +167,102 @@
     text-indent: 10px;
 }
 
-.timeline:before {
-    top: 0;
+/*历史回滚*/
+.rollbackul:before {
+    top: 70px;
     bottom: 0;
     position: absolute;
     content: " ";
     width: 10px;
     background-color: #eaeaea;
-    left: 50%;
-    margin-left: -5px;
+    left: 49%;
     border-radius: 5px;
+}
+.timeline-badge {
+    color: #fff;
+    width: 55px;
+    height: 55px;
+    line-height: 59px;
+    font-size: 30px;
+    text-align: center;
+    background-color: #673AB7;
+    z-index: 10;
+    border-radius: 50%;
+    border: 5px solid #eaeaea;
+    position: absolute;
+    left: 50%;
+    margin-left: -33px;
+}
+.add-fl .rollbackul-li-content:before {
+    right: 291px;
+    border-left: 0 solid #eaeaea;
+    border-right: 15px solid #eaeaea;
+}
+.rollbackul-li-content:before {
+    border-left-width: 0;
+    border-right-width: 15px;
+    position: absolute;
+    left: 291px;
+    top: 20px;
+    right: -15px;
+    display: inline-block;
+    border-top: 15px solid transparent;
+    border-left: 15px solid #eaeaea;
+    border-right: 0 solid #eaeaea;
+    border-bottom: 15px solid transparent;
+    content: " ";
+}
+.rollbackul-li-content p {
+    line-height: 25px;
+}
+.rollbackul-li-content p span {
+    color: #3c57ef;
+}
+.rollbackul-li-content h4 {
+    font-size: 16px;
+}
+.rollbackul-li-content button {
+    margin-top: 5px;
+}
+.add-fl:first-child .rollbackul-li-content button {
+    display: none;
+}
+.rollbackul {
+    width: 100%;
+}
+.rollbackul li {
+    position: relative;
+}
+.rollbackul li .rollbackul-li-content {
+    width: 260px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 15px #ccc;
+    padding: 15px;
+}
+.add-fl .rollbackul-li-content {
+    float: right;
+}
+.hover-hand {
+    cursor: pointer;
 }
 
-.rollback-ul li span{
-    width: 280px;
-    height: 190px;
-    display: inline-block;
-    box-shadow: 3px 3px 12px #ccc;
+/*发布详情*/
+.deploy-detail p,.deploy-detail h4 {
+    clear: both;
 }
-.rollback-ul:before {
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    content: " ";
-    width: 10px;
-    background-color: #eaeaea;
-    left: 50%;
-    margin-left: 35px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+.deploy-detail p {
+    padding-left: 15px;
+}
+.deploy-detail h4 {
+    line-height: 30px;
+    font-weight: 600;
+}
+.deploy-detail p span {
+    float: left;
+    width: 50%;
+}
+.bg-f9 {
+    background: #f9f9f9;
 }
 
 

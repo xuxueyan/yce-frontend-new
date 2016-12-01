@@ -148,6 +148,12 @@
     yce.api.apply.applyDelete = function(http, data){
         return createRequest(http, '/api/v1/organizations/' + data.orgId + '/deployments/' + data.appName + '/delete', POST, data);
     }
+    yce.api.apply.history = function(http, data){
+        return createRequest(http, '/api/v1/organizations/' + data.orgId + '/datacenters/' + data.dcId + '/deployments/' + data.appName + '/history');
+    }
+    yce.api.apply.historyRollback = function(http, data){
+        return createRequest(http, '/api/v1/organizations/' + data.orgId + '/deployments/' + data.appName + '/rollback', POST, data);
+    }
 
 
 
