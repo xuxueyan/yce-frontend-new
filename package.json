@@ -1,0 +1,26 @@
+{
+  "name": "yce-frontend",
+  "version": "1.0.0",
+  "description": "new frontend ",
+  "main": "login-app.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp-clean": "^0.3.2",
+    "gulp-uglify": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markh5/yce-frontend-new.git"
+  },
+  "author": "mark",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markh5/yce-frontend-new/issues"
+  },
+  "homepage": "https://github.com/markh5/yce-frontend-new#readme"
+}

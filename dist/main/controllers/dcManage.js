@@ -1,0 +1,1 @@
+define(function(){return function($scope,$http){function e(){var e=yce.api.dateCenter.dateCenterList($http,t);utils.responseHandler(e,function(e){$scope.dataCenterList=JSON.parse(e.data),angular.forEach($scope.dataCenterList.datacenters,function(e){e.nodePort=JSON.parse(e.nodePort)})})}var t={orgId:localStorage.orgId,userId:localStorage.userId};e()}});

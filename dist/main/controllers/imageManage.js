@@ -1,0 +1,1 @@
+define(function(){return function($scope,$http){function a(){var a=yce.api.image.imageList($http,e);utils.responseHandler(a,function(a){$scope.imageManageList=JSON.parse(a.data)})}var e={orgId:localStorage.orgId,userId:localStorage.userId};a()}});

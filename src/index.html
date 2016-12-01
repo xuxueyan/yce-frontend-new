@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>容器云管理平台</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/login/login.css">
+</head>
+<body>
+
+<div class="login" ng-controller="loginController">
+    <h1 class="login-title">易宝容器云</h1>
+
+    <form name="loginForm" class="login-form" ng-keypress="loginForm.$invalid ? return :enterLogin($event);">
+
+        <p class="login-input-title">用户名</p>
+        <input type="text" class="login-input" ng-model="userName" required>
+        <p class="login-input-title">密 码</p>
+        <input type="password" class="login-input" ng-model="userPassword" required>
+
+        <input type="button" value="登 录" class="login-btn clear-class" ng-click="loginForm.$invalid ? shakeBool = true : login();"
+               ng-class="{'shake': shakeBool, 'animated': shakeBool}">
+    </form>
+
+    <ng-atomic-notify></ng-atomic-notify>
+
+</div>
+
+
+</body>
+<script src="lib/require.js" data-main="login-main"></script>
+
+</html>

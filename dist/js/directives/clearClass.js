@@ -1,0 +1,1 @@
+!function(){"use strict";angular.module("clearClass",[]).directive("clearClass",function($timeout){return{restrict:"C",scope:!1,link:function(n,c,t){n.$watch("shakeBool",function(c){$timeout(function(){n.shakeBool=!1},1500)})}}})}(angular);
